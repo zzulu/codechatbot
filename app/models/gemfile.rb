@@ -1,0 +1,2 @@
+class Gemfile < ApplicationRecord
+end
