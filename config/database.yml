@@ -9,7 +9,6 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   username: root
-  password: <%= Rails.application.credentials.dig(:database_password) %>
 
 development:
   <<: *default
@@ -25,3 +24,4 @@ test:
 production:
   <<: *default
   database: rubychatbot_production
+  password: <%= Rails.application.credentials.dig(:database_password) %>
