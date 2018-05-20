@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :trackable, :validatable
 
+  has_many :bots
+
   # For username sign in
   def email_required?
     false
