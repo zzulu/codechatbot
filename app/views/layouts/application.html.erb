@@ -14,7 +14,14 @@
   </head>
 
   <body>
-    <%= render 'layouts/navbar' %>
+    <%= react_component("Navbar", {
+      root_path: root_path,
+      edit_user_registration_path: edit_user_registration_path,
+      destroy_user_session_path: destroy_user_session_path,
+      controller: params[:controller],
+      username: current_user.username,
+    }, {prerender: true}) if user_signed_in? %>
+    
     <%= yield %>
   </body>
 </html>

@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_many :bots
 
+  def bots_with_templates
+    Bot.templates.where.not(id: self.bots.map(&:parent_id).uniq) + bots
+  end
+
   # For username sign in
   def email_required?
     false
