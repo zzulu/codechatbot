@@ -2,20 +2,14 @@ class BotForm extends React.Component {
   constructor(props) {
     super(props);
     this.initCodeMirror = this.initCodeMirror.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.state = {
       bot_id: this.props.bot? `/${this.props.bot.id}`:'',
       message: this.props.bot ? this.props.bot.message:'',
-      response: this.props.bot ? this.props.bot.response:'',
-      result: ''
+      response: this.props.bot ? this.props.bot.response:''
     }
   }
 
-  handleChange(e) {
-    this.setState({ message: e.target.value })
-  }
-
-  // CodeMirror config
+  // CodeMirror configure
   betterTab(cm) {
     if (cm.somethingSelected()) {
       cm.indentSelection("add");
@@ -26,7 +20,7 @@ class BotForm extends React.Component {
   }
 
   initCodeMirror() {
-    var editor = CodeMirror.fromTextArea(this.refs.codeEditor, {
+    editor = CodeMirror.fromTextArea(this.refs.codeEditor, {
       lineNumbers: true,
       mode: 'ruby',
       theme: 'monokai',
@@ -34,7 +28,7 @@ class BotForm extends React.Component {
     });
 
     editor.on("change", (cm) => {
-      this.setState({ response: cm.getValue() })
+      this.setState({response: cm.getValue()});
     })
   }
 
@@ -52,20 +46,23 @@ class BotForm extends React.Component {
 
   render () {
     return (
-      <form action={`/bots${this.state.bot_id}`} method="post" encType="multipart/form-data" acceptCharset="UTF-8" className="col-12">
+      <form action={`/bots${this.state.bot_id}`} method="post" encType="multipart/form-data" acceptCharset="UTF-8">
         <input name="utf8" type="hidden" value="✓" />
         {this.renderMethod(this.props.method)}
         <input type="hidden" name="authenticity_token" value={this.props.formAuthenticityToken} />
         <div className="form-group">
           <label htmlFor="bot_message">입력 메시지</label>
-          <input type="text" id="bot_message" name="bot[message]" value={this.state.message} onChange={this.handleChange} className="form-control"/>
+          <input type="text" id="bot_message" name="bot[message]" value={this.state.message} onChange={(e)=>this.setState({response: e.target.value})} className="form-control"/>
         </div>
         <div className="form-group">
           <label htmlFor="bot_response">답변 코드</label>
           <textarea ref="codeEditor" className="form-control" name="bot[response]" value={this.state.response} readOnly={true} rows="10"></textarea>
-          <div id="bot_response">{this.state.response}</div>
         </div>
-        <button type="submit" className="btn btn-primary">확인</button>
+
+        <div>
+          <button type="submit" className="btn btn-primary">저장</button>
+          <button type="button" className="btn btn-outline-success" onClick={()=>this.props.runCode(this.state.response)}>실행</button>
+        </div>
       </form>
     );
   }

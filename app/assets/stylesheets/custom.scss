@@ -1,1 +1,13 @@
-
+// CodeMirror
+.readonly-editor .CodeMirror-cursor{
+  display: none !important
+}
+.height-auto .CodeMirror{
+  height: auto;
+}
+.hide{
+  display:none !important;
+}
+.page-header{
+  padding-top: 20px;
+}

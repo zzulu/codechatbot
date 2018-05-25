@@ -1,4 +1,15 @@
 class Bots extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bots: this.props.bots
+    }
+  }
+
+  deleteBot(e) {
+    
+  }
+
   render () {
     return (
       <div className="container">

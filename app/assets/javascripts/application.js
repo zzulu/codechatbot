@@ -21,5 +21,4 @@
 //= require components
 //= require codemirror
 //= require codemirror/modes/ruby
-//= require codemirror_config
 //= require custom

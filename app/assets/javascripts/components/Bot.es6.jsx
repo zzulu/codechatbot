@@ -6,7 +6,7 @@ class Bot extends React.Component {
           {this.props.bot.message}       
         </div>
         <div className="col-6">
-          {this.props.bot.response}
+          <CodeMirrorReadOnly value={this.props.bot.response} heightAuto={true} />
         </div>
         <div className="col-3">
           <a href={`/bots/${this.props.bot.id}`}>보기</a>
