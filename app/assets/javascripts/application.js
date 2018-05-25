@@ -19,4 +19,7 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require_tree .
+//= require codemirror
+//= require codemirror/modes/ruby
+//= require codemirror_config
+//= require custom

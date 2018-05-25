@@ -14,5 +14,18 @@
 
 @import 'bootstrap';
 @import 'codemirror';
-
+@import 'codemirror/themes/monokai';
 @import 'custom';
+
+.readonly-editor .CodeMirror-cursor{
+    display: none !important
+}
+.readonly-editor .CodeMirror{
+  height: auto;
+}
+.hide{
+  display:none !important;
+}
+.page-header{
+  padding-top: 20px;
+}

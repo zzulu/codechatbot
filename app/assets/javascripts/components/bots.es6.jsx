@@ -1,9 +1,14 @@
 class Bots extends React.Component {
   render () {
     return (
-      <React.Fragment>
-        {this.props.bots.map((bot)=>(<Bot message={bot.message} response={bot.response}/>))}
-      </React.Fragment>
+      <div className="container">
+        { this.props.bots.map(
+            (bot) => (
+              <Bot key={bot.id} bot={bot} />
+            )
+          )
+        }
+      </div>
     );
   }
 }

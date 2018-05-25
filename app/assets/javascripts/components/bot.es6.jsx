@@ -3,13 +3,15 @@ class Bot extends React.Component {
     return (
       <div className="row">
         <div className="col-3">
-          {this.props.message}       
+          {this.props.bot.message}       
         </div>
         <div className="col-6">
-          {this.props.response}
+          {this.props.bot.response}
         </div>
         <div className="col-3">
-          보기 수정 삭제       
+          <a href={`/bots/${this.props.bot.id}`}>보기</a>
+          <a href={`/bots/${this.props.bot.id}/edit`}>수정</a>
+          <a href={`/bots/${this.props.bot.id}`} data-method='delete'>삭제</a>
         </div>
       </div>
     );
@@ -17,6 +19,5 @@ class Bot extends React.Component {
 }
 
 Bot.propTypes = {
-  message: PropTypes.string,
-  response: PropTypes.string
+  bot: PropTypes.object
 };
