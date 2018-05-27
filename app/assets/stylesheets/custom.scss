@@ -1,13 +1,58 @@
+// Public
+
+label {
+  &.required {
+    &::after {
+      content: ' *';
+      color: $oc-red-6;
+    }
+  }
+}
+
 // CodeMirror
-.readonly-editor .CodeMirror-cursor{
-  display: none !important
+.readonly-editor {
+  .CodeMirror-cursor {
+    display: none !important
+  }
 }
-.height-auto .CodeMirror{
-  height: auto;
+
+.height-auto {
+  .CodeMirror {
+    height: auto;
+  }
 }
-.hide{
-  display:none !important;
+
+.hide {
+  display: none !important;
 }
-.page-header{
-  padding-top: 20px;
+
+
+// Bot
+
+.bot {
+  padding-top: 3rem;
+  padding-top: 3rem;
+
+  &--label {
+    // font-weight: 700;
+  }
+
+  &--message {
+    color: $oc-gray-6;
+    border: $border-width solid $oc-gray-2;
+    padding: $input-btn-padding-y $input-btn-padding-x;
+    line-height: $input-btn-line-height;
+  }
+
+  &--result {
+    border-top: $border-width solid $border-color;
+    padding: $input-btn-padding-y 0;
+    font-family: $font-family-monospace;
+  }
+
+  &--button {
+    a {
+      margin-right: 0.5rem;
+    }
+  }
 }

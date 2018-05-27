@@ -13,21 +13,24 @@ class ShowBot extends React.Component {
   render() {
     return(
       <div className="container">
-        <div className="row py-5">
-          <div className="col-6">
-            <label>입력 메시지</label>
-            <p>{this.props.bot.message}</p>
+        <div className="row bot">
+          <div className="col-12 col-lg-6">
+            <label className="bot--label">입력 메시지</label>
+            <p className="bot--message">{this.props.bot.message}</p>
 
-            <label>답변 코드</label>
+            <label className="bot--label">답변 코드</label>
             <CodeMirrorReadOnly value={this.props.bot.response} />
             
-            <div className="py-3">
-              <a href={`/bots/${this.props.bot.id}/edit`} className="btn btn-outline-info">수정</a>
-              <a href={`/bots/${this.props.bot.id}`} data-method="delete" className="btn btn-outline-danger">삭제</a>
-              <button className="btn btn-outline-success" onClick={()=>this.runCode(this.props.bot.response)}>실행</button>
+            <div className="d-flex justify-content-between py-3">
+              <div className="bot--button">
+                <a href={`/bots/${this.props.bot.id}/edit`} className="btn btn-info">수정</a>
+                <a href={`/bots/${this.props.bot.id}`} data-method="delete" data-confirm="삭제하시겠습니까?" className="btn btn-danger">삭제</a>
+                <a href="/bots" className="btn btn-secondary">목록</a>
+              </div>
+              <button className="btn btn-success" onClick={()=>this.runCode(this.props.bot.response)}>실행</button>
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <BotResult result={this.state.result}/>
           </div>
         </div>
