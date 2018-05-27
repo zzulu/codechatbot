@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'bots#index'
   devise_for :users
   
+  get 'account_connection', to: 'bots#account_connection', as: :account_connection
+
   get 'keyboard', to: 'api#keyboard'
   post 'message', to: 'api#message'
   post 'friend', to: 'api#create_friend'

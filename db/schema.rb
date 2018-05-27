@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2018_05_20_080155) do
     t.boolean "friend", default: false
     t.boolean "in_chat_room", default: false
     t.boolean "active", default: true
-    t.string "auth_code"
+    t.string "connection_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true

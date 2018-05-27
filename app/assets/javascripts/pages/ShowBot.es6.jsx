@@ -7,7 +7,7 @@ class ShowBot extends React.Component {
   }
 
   runCode(response) {
-    this.setState({ result: response })
+    this.setState({ result: response });
   }
 
   render() {

@@ -8,21 +8,21 @@ class EditBot extends React.Component {
   }
 
   runCode(response) {
-    this.setState({result: response})
+    this.setState({ result: response });
   }
 
-  render () {
-    return (
+  render() {
+    return(
       <div className="container">
-        <div className="row py-5">
-          <div className="col-6">
+        <div className="row bot">
+          <div className="col-12 col-lg-6">
             <BotForm
-            formAuthenticityToken={this.props.formAuthenticityToken}
-            method="put"
-            bot={this.props.bot}
-            runCode={this.runCode}/>
+              formAuthenticityToken={this.props.formAuthenticityToken}
+              method="put"
+              bot={this.props.bot}
+              runCode={this.runCode}/>
           </div>
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <BotResult result={this.state.result}/>
           </div>
         </div>

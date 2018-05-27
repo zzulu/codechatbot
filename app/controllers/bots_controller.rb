@@ -1,5 +1,7 @@
 class BotsController < ApplicationController
   before_action :authenticate_user!
+  before_action :connect_user!, except:[:account_connection]
+  before_action :connected_user!, only:[:account_connection]
   before_action :get_bot, only: [:show, :edit, :update, :destroy]
 
   # GET /bots
@@ -68,6 +70,10 @@ class BotsController < ApplicationController
     render :json => {result: ret}
   end
 
+  def account_connection
+
+  end
+
   private
     def get_bot
       @bot = Bot.find(params[:id])
@@ -75,6 +81,14 @@ class BotsController < ApplicationController
 
     def bot_params
       params.require(:bot).permit(:prepend, :append, :message, :response)
+    end
+
+    def connect_user!
+      redirect_to account_connection_path and return if current_user.user_key.nil?
+    end
+
+    def connected_user!
+      redirect_to root_path and return if current_user.user_key.present?
     end
 
     # def set_current_user

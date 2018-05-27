@@ -43,7 +43,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.boolean :active, default: true
 
       ## Connect Account
-      t.string :auth_code
+      t.string :connection_code
 
       t.timestamps null: false
     end
