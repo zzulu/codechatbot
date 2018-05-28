@@ -63,6 +63,10 @@ label {
 
   text-align: center;
 
+  h3 {
+    margin-bottom: 1rem;
+  }
+
   &--text {
     color: $oc-gray-6;
   }
@@ -79,7 +83,9 @@ label {
   }
 
   &--code-char {
+    display: inline-block;
     font-size: 2rem;
+    width: 3rem;
     color: $oc-gray-7;
     border: $border-width solid $border-color;
     padding: $input-btn-padding-y $input-btn-padding-x;
@@ -108,7 +114,6 @@ label {
   &--head {
     position: relative;
     padding-bottom: 1rem;
-    // border-bottom: $border-width*2 solid $border-color;
 
     &:after {
       content:""; 
@@ -116,7 +121,7 @@ label {
       background: $border-color; 
       bottom: 0;
       left: 15px; 
-      height: $border-width*2;
+      height: $border-width;
       width: calc(100% - (15px * 2));
     }
   }
@@ -125,7 +130,6 @@ label {
     position: relative;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    // border-bottom: $border-width solid $border-color;
 
     &:after {
       content:""; 
@@ -146,3 +150,26 @@ label {
 
 }
 
+// users
+.user {
+  min-height: 100vh;
+
+  &--intro {
+    color: $oc-gray-0;
+    background-color: $oc-gray-9;
+    padding: 25vh 3rem;
+
+    h2:not(:last-child) {
+      color: $oc-gray-6;
+    }
+
+  }
+
+  &--form {
+    padding: 25vh 2rem;
+  }
+
+  &--button {
+    margin-top: 2rem;
+  }
+}

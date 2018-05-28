@@ -40,8 +40,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource/disconnect
   def disconnect
-    current_user.update_attributes(user_key: nil, friend: false, in_chat_room: false)
-    redirect_to root_path
+    current_user.disconnect.set_connection_code
+    redirect_to bots_path
   end
 
   # protected
@@ -57,9 +57,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_update_path_for(resource)
+    bots_path
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

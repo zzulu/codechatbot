@@ -88,6 +88,6 @@ class BotsController < ApplicationController
     end
 
     def connected_user!
-      redirect_to root_path and return if current_user.user_key.present?
+      redirect_to bots_path and return if current_user.user_key.present?
     end
 end

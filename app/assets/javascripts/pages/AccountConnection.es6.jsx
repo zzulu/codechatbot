@@ -16,8 +16,8 @@ class AccountConnection extends React.Component {
             카카오톡 계정 연결을 위하여, 루비챗봇 플러스 친구 대화방에서 아래의 코드를 입력하세요.
           </p>
           <div className="connection--code-wrapper">
-            {this.props.connectionCode.split('').map((c)=>(
-              <span key={c} className="connection--code-char">{c}</span>
+            {this.props.connectionCode.split('').map((c, i)=>(
+              <span key={i} className="connection--code-char">{c}</span>
             ))}
           </div>
           <div className="connection--pending">
