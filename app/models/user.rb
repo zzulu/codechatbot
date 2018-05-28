@@ -30,9 +30,9 @@ class User < ApplicationRecord
   def self.create_connection(user_key, connection_code)
     if user = find_by(connection_code: connection_code)
       user.update_attributes(user_key: user_key, connection_code: nil, friend: true, in_chat_room: true)
-      true
+      user
     else
-      false
+      nil
     end
   end
 

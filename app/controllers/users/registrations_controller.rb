@@ -40,7 +40,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource/disconnect
   def disconnect
-    current_user.disconnect.set_connection_code
+    current_user.disconnect
+    current_user.set_connection_code
     redirect_to bots_path
   end
 
