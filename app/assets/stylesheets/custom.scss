@@ -28,7 +28,6 @@ label {
 
 
 // Bot
-
 .bot {
   padding-top: 3rem;
   padding-top: 3rem;
@@ -54,5 +53,40 @@ label {
     a {
       margin-right: 0.5rem;
     }
+  }
+}
+
+// Connection
+.connection {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  text-align: center;
+
+  &--text {
+    color: $oc-gray-6;
+  }
+
+  &--code-wrapper {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    span {
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &--code-char {
+    font-size: 2rem;
+    color: $oc-gray-7;
+    border: $border-width solid $border-color;
+    padding: $input-btn-padding-y $input-btn-padding-x;
+  }
+
+  &--pending {
+    margin-top: 1rem;
+    color: $oc-gray-6;
   }
 }

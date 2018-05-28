@@ -42,7 +42,7 @@ class ApiController < ApplicationController
       @user = User.find_by(user_key: params[:user_key])  
       if @user.nil? 
         if User.create_connection(params[:user_key], @content)
-          render json: {'message': {'text': '계정 연동에 성공하였습니다. rb.chatbot.io에서 나만의 챗봇을 만들어 보세요 :)'}}
+          render json: {'message': {'text': '계정 연동에 성공하였습니다. \'인증 완료\' 버튼을 클릭하여 나만의 챗봇 만들기를 시작해 보세요 :)'}}
         elsif @content.length == 4 && @content.match(/[a-z0-9]{4}/i).present?
           render json: {'message': {'text': '잘못된 인증 코드를 입력하셨습니다.'}}
         else
