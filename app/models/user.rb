@@ -14,11 +14,12 @@ class User < ApplicationRecord
 
   def set_connection_code
     self.update_columns(connection_code: SecureRandom.uuid.split('-')[1..3].sample.to_s)
+    # 중복된 값이 set 되는 경우, 오류 발생함. 예외 처리 필요.
   end
 
   def self.create_connection(user_key, connection_code)
     if user = find_by(connection_code: connection_code)
-      user.update_attributes(user_key: user_key)
+      user.update_attributes(user_key: user_key, connection_code: nil, friend: true, in_chat_room: true)
       true
     else
       false

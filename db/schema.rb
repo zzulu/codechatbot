@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_05_20_080155) do
     t.string "connection_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["connection_code"], name: "index_users_on_connection_code", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

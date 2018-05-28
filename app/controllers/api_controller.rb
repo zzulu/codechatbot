@@ -23,6 +23,7 @@ class ApiController < ApplicationController
     render json: {}, status: :ok
   end
 
+  # exit chatroom
   def chat_room
     @user = User.find_by(user_key: params[:user_key])
     if @user.present?
