@@ -30,7 +30,7 @@ label {
 // Bot
 .bot {
   padding-top: 3rem;
-  padding-top: 3rem;
+  padding-bottom: 3rem;
 
   &--label {
     // font-weight: 700;
@@ -50,7 +50,7 @@ label {
   }
 
   &--button {
-    a {
+    a:not(:last-child) {
       margin-right: 0.5rem;
     }
   }
@@ -90,3 +90,59 @@ label {
     color: $oc-gray-6;
   }
 }
+
+
+// Bots list
+.bots {
+  padding-bottom: 3rem;
+
+  &--button {
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+
+    a {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &--head {
+    position: relative;
+    padding-bottom: 1rem;
+    // border-bottom: $border-width*2 solid $border-color;
+
+    &:after {
+      content:""; 
+      position: absolute; 
+      background: $border-color; 
+      bottom: 0;
+      left: 15px; 
+      height: $border-width*2;
+      width: calc(100% - (15px * 2));
+    }
+  }
+  
+  &--item {
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    // border-bottom: $border-width solid $border-color;
+
+    &:after {
+      content:""; 
+      position: absolute; 
+      background: $border-color; 
+      bottom: 0;
+      left: 15px; 
+      height: $border-width; 
+      width: calc(100% - (15px * 2));
+    }
+
+    .item--button {
+      color: $oc-red-5;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+  }
+
+}
+

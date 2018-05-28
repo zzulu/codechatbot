@@ -21,7 +21,7 @@ class ShowBot extends React.Component {
             <label className="bot--label">답변 코드</label>
             <CodeMirrorReadOnly value={this.props.bot.response} />
             
-            <div className="d-flex justify-content-between py-3">
+            <div className="d-flex justify-content-between pt-3">
               <div className="bot--button">
                 <a href={`/bots/${this.props.bot.id}/edit`} className="btn btn-info">수정</a>
                 <a href={`/bots/${this.props.bot.id}`} data-method="delete" data-confirm="삭제하시겠습니까?" className="btn btn-danger">삭제</a>

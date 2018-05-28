@@ -3,6 +3,7 @@ class BotsController < ApplicationController
   before_action :connect_user!, except:[:account_connection]
   before_action :connected_user!, only:[:account_connection]
   before_action :get_bot, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, if: Proc.new {|c| c.request.format.json? }
 
   # GET /bots
   # GET /bots.json
@@ -71,7 +72,6 @@ class BotsController < ApplicationController
   end
 
   def account_connection
-
   end
 
   private
@@ -90,11 +90,4 @@ class BotsController < ApplicationController
     def connected_user!
       redirect_to root_path and return if current_user.user_key.present?
     end
-
-    # def set_current_user
-    #   @current_user = User.where(id: session[:user_id]).take
-    #   if @current_user.nil?
-    #     redirect_to :root
-    #   end
-    # end
 end

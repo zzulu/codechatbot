@@ -1,17 +1,21 @@
 class Bot extends React.Component {
+  renderButton(editing, id) {
+    if(editing) {
+      return(
+        <span className="item--button" onClick={()=>this.props.deleteBot(this.props.bot.id)}><i className="fas fa-times"></i></span>
+      );
+    }
+  }
+
   render () {
     return (
-      <div className="row">
-        <div className="col-3">
-          {this.props.bot.message}       
+      <div className="row bots--item">
+        <div className="col-12 col-sm-3 mb-2 mb-sm-0">
+          <a href={`/bots/${this.props.bot.id}`}>{this.props.bot.message}</a>
+          {this.renderButton(this.props.editing, this.props.bot.id)}
         </div>
-        <div className="col-6">
+        <div className="col-12 col-sm-9">
           <CodeMirrorReadOnly value={this.props.bot.response} heightAuto={true} />
-        </div>
-        <div className="col-3">
-          <a href={`/bots/${this.props.bot.id}`}>보기</a>
-          <a href={`/bots/${this.props.bot.id}/edit`}>수정</a>
-          <a href={`/bots/${this.props.bot.id}`} data-method='delete'>삭제</a>
         </div>
       </div>
     );
