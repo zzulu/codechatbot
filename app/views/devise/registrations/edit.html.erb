@@ -31,9 +31,10 @@
         </div>
       <% end %>
 
-      <hr>
-
-      <%= button_to '계정 연결 해제', users_disconnect_path, data: {confirm: "계정 연결을 해제합니다."}, method: :post, class: 'btn btn-danger' %>
+      <% unless resource.user_key.nil? %>
+        <hr>
+        <%= button_to '계정 연결 해제', users_disconnect_path, data: {confirm: "계정 연결을 해제합니다."}, method: :post, class: 'btn btn-danger' %>
+      <% end %>
     </div>
   </div>  
 </div>

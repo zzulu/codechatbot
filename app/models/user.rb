@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates :username, presence: {message: '이름을 입력하세요.'}, uniqueness: {message: '존재하는 이름입니다. 다른 이름을 입력해 주세요.'}
 
-  # after_update :set_connection_code, if: Proc.new { |user| user.user_key.nil? }
+  after_update :set_connection_code, if: Proc.new { |user| user.user_key.nil? }
 
   def bots_with_templates
     Bot.templates.where.not(id: self.bots.map(&:parent_id).uniq) + bots
