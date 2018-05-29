@@ -156,6 +156,7 @@ label {
   &--intro {
     color: $oc-gray-0;
     background-color: $oc-gray-9;
+    width: 45vw;
     padding: 25vh 3rem;
 
     h2:not(:last-child) {
@@ -165,7 +166,8 @@ label {
   }
 
   &--form {
-    padding: 25vh 2rem;
+    width: 55vw;
+    padding: 25vh 4rem;
   }
 
   &--button {
