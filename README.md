@@ -1,5 +1,8 @@
 # Ruby Chatbot
 
+# release 0.1.4
+- Add meta tags & favicons
+
 ## release 0.1.3
 - Add errors page
 - Change some words
