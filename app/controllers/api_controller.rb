@@ -4,7 +4,23 @@ class ApiController < ApplicationController
   before_action :validate_connection, only:[:message]
 
   def message
-    render json: {'message': {'text': @content}}
+    bot = @user.bots.find_by(message: @content)
+    if bot.present?
+      result = bot.run_code
+    else
+      bot = Bot.templates.find_by(message: @content)
+      if bot.present?
+        result = bot.run_code
+      end
+    end
+    
+    if bot.present?
+      result = "# #{@user.username} 봇\r\n#{result}"
+    else
+      result = "# #{@user.username} 봇\r\n설정되지 않은 입력 메시지 입니다. ('#{@content}')"
+
+    end
+    render json: {'message': {'text': result}}
   end
 
   def create_friend

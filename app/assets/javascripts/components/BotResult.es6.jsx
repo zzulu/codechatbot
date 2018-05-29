@@ -14,7 +14,7 @@ class BotResult extends React.Component {
     return(
       <React.Fragment>
         <label>실행 결과</label>
-        <div className="bot--result">{this.state.result}</div>
+        <pre className="bot--result">{this.state.result}</pre>
       </React.Fragment>
     );
   }
