@@ -6,12 +6,28 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>루비챗봇<%= yield(:title) %></title>
 
+    <meta name="description" content="Make your chatbot who can run ruby :)">
+    <meta name="application-name" content="LIKE LION">
+    <meta name="author" content="LIKE LION">
+    <meta property="og:title" content="루비챗봇">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rb.likelion.io">
+    <meta property="og:description" content="Make your chatbot who can run ruby :)">
+    <meta property="og:image" content="<%= image_url('og-image.png') %>">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'https://js.pusher.com/4.1/pusher.min.js', 'data-turbolinks-track': 'reload' %>
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="<%= image_url('favicons/favicon.ico') %>" />
+    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<%= image_url('favicons/favicon-152.png') %>">
+    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<%= image_url('favicons/favicon-120.png') %>">
   </head>
 
   <body>
