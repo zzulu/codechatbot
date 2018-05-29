@@ -1,10 +1,29 @@
 class AccountConnection extends React.Component {
   constructor(props) {
     super(props);
+    this.initPusher = this.initPusher.bind(this);
     this.state = {
-      pendingClass: 'btn-outline-success disabled',
-      pendingContent: '인증 대기 중'
+      pendingClass: 'btn-outline-success disabled connection--pending',
+      pendingContent: '인증 대기'
     }
+  }
+
+  initPusher() {
+    pusher = new Pusher(this.props.pusherKey, { cluster: 'ap1', encrypted: true });
+
+    channel = pusher.subscribe('account-connection');
+    channel.bind('cennection-success', (data) => {
+      if (data.code == this.props.connectionCode) {
+        this.setState({
+          pendingClass: 'btn-success connection--success',
+          pendingContent: '인증 완료'
+        })
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.initPusher();
   }
 
   render() {
@@ -20,8 +39,11 @@ class AccountConnection extends React.Component {
               <span key={i} className="connection--code-char">{c}</span>
             ))}
           </div>
-          <div className="connection--pending">
-            <a href="/" className={`btn ${this.state.pendingClass}`}>{this.state.pendingContent}</a>
+          <div className="connection--button">
+            <a href="/bots" className={`btn ${this.state.pendingClass}`}>
+              {this.state.pendingContent}
+              <div className="border--spinner"></div>
+            </a>
           </div>
         </div>
       </div>
@@ -30,5 +52,6 @@ class AccountConnection extends React.Component {
 }
 
 AccountConnection.propTypes = {
-  connectionCode: PropTypes.string
+  connectionCode: PropTypes.string,
+  pusherKey: PropTypes.string
 }

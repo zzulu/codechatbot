@@ -1,1 +1,4 @@
-<%= react_component('ShowBot', {bot: @bot})%>
+<%= react_component('ShowBot', {
+      bot: @bot.as_json,
+      role: current_user.role
+    })%>

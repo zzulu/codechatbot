@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :trackable, :validatable
+  devise :database_authenticatable, :registerable, :trackable, :validatable
 
   has_many :bots
 
@@ -30,10 +29,15 @@ class User < ApplicationRecord
   def self.create_connection(user_key, connection_code)
     if user = find_by(connection_code: connection_code)
       user.update_attributes(user_key: user_key, connection_code: nil, friend: true, in_chat_room: true)
+      Pusher.trigger('account-connection', 'cennection-success', { code: connection_code})
       user
     else
       nil
     end
+  end
+
+  def admin?
+    self.role == 'admin'
   end
 
   # For username sign in

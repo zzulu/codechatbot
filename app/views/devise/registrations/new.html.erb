@@ -1,10 +1,10 @@
-<div class="d-flex user">
-  <div class="flex-grow-1 d-flex flex-column user--intro">
+<div class="d-flex flex-column flex-lg-row user">
+  <div class="d-flex flex-row flex-lg-column user--intro">
     <h2>루비챗봇</h2>
-    <h2>회원가입</h2>
+    <h2 class="ml-2 ml-lg-0">회원가입</h2>
   </div>
   
-  <div class="flex-grow-1 d-flex flex-column user--form">
+  <div class="d-flex flex-column user--form">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.label :username, '이름', class:"required" %>
