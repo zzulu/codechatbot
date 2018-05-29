@@ -8,6 +8,26 @@ label {
   }
 }
 
+// Errors
+#errors {
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  .header {
+    padding-bottom: 1rem;
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 100;
+    }
+  }
+
+  .dialog {
+    h1 {
+      font-weight: 100;
+    }
+  }
+}
+
 // CodeMirror
 .readonly-editor {
   .CodeMirror-cursor {

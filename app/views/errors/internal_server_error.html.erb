@@ -1,0 +1,15 @@
+<% content_for :title, " # ERROR 500" %>
+
+<main id="errors">
+  <div class="container">
+    <header class="header">
+      <h1>500</h1>
+    </header>
+  
+    <article class="dialog">
+      <h1>예상하지 못한 오류가 발생하였습니다.</h1>
+      <p>페이지 새로고침을 시도하시거나, 같은 문제가 지속적으로 발생한다면 관리자에게 문의하시기 바랍니다.</p>
+      <%= link_to '메인으로', bots_path %>
+    </article>
+  </div>
+</main>
