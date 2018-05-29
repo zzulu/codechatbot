@@ -1,0 +1,174 @@
+// Public
+label {
+  &.required {
+    &::after {
+      content: ' *';
+      color: $oc-red-6;
+    }
+  }
+}
+
+// CodeMirror
+.readonly-editor {
+  .CodeMirror-cursor {
+    display: none !important
+  }
+}
+
+.height-auto {
+  .CodeMirror {
+    height: auto;
+  }
+}
+
+.hide {
+  display: none !important;
+}
+
+
+// Bot
+.bot {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+
+  &--label {
+    // font-weight: 700;
+  }
+
+  &--message {
+    color: $oc-gray-6;
+    border: $border-width solid $oc-gray-2;
+    padding: $input-btn-padding-y $input-btn-padding-x;
+    line-height: $input-btn-line-height;
+  }
+
+  &--result {
+    border-top: $border-width solid $border-color;
+    padding: $input-btn-padding-y 0;
+    font-family: $font-family-monospace;
+  }
+
+  &--button {
+    a:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Connection
+.connection {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  text-align: center;
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+
+  &--text {
+    color: $oc-gray-6;
+  }
+
+  &--code-wrapper {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    span {
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &--code-char {
+    display: inline-block;
+    font-size: 2rem;
+    width: 3rem;
+    color: $oc-gray-7;
+    border: $border-width solid $border-color;
+    padding: $input-btn-padding-y $input-btn-padding-x;
+  }
+
+  &--pending {
+    margin-top: 1rem;
+    color: $oc-gray-6;
+  }
+}
+
+
+// Bots list
+.bots {
+  padding-bottom: 3rem;
+
+  &--button {
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+
+    a {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &--head {
+    position: relative;
+    padding-bottom: 1rem;
+
+    &:after {
+      content:""; 
+      position: absolute; 
+      background: $border-color; 
+      bottom: 0;
+      left: 15px; 
+      height: $border-width;
+      width: calc(100% - (15px * 2));
+    }
+  }
+  
+  &--item {
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    &:after {
+      content:""; 
+      position: absolute; 
+      background: $border-color; 
+      bottom: 0;
+      left: 15px; 
+      height: $border-width; 
+      width: calc(100% - (15px * 2));
+    }
+
+    .item--button {
+      color: $oc-red-5;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+  }
+
+}
+
+// users
+.user {
+  min-height: 100vh;
+
+  &--intro {
+    color: $oc-gray-0;
+    background-color: $oc-gray-9;
+    padding: 25vh 3rem;
+
+    h2:not(:last-child) {
+      color: $oc-gray-6;
+    }
+
+  }
+
+  &--form {
+    padding: 25vh 2rem;
+  }
+
+  &--button {
+    margin-top: 2rem;
+  }
+}

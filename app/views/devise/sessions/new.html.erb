@@ -1,0 +1,31 @@
+<div class="d-flex user">
+  <div class="flex-grow-1 d-flex flex-column user--intro">
+    <h2>루비챗봇</h2>
+  </div>
+
+  <div class="flex-grow-1 d-flex flex-column user--form">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :username, '이름' %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, '비밀번호' %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <% if flash.present? %>
+        <% flash.each do |key, message| %>
+          <small class="form-text text-muted"><%= message %></small>
+        <% end %>
+      <% end %>
+
+      <div class="user--button">
+        <%= f.submit "로그인", class: "btn btn-primary" %>
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
+</div>
