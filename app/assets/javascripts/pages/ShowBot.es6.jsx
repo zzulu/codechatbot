@@ -3,7 +3,7 @@ class ShowBot extends React.Component {
     super(props);
     this.state = {
       template: this.props.bot.userId ? false : true,
-      forked: this.props.bot.parendId ? true : false,
+      forked: this.props.bot.parentId ? true : false,
       result: ''
     }
   }
