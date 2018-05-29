@@ -2,8 +2,10 @@ class BotsController < ApplicationController
   before_action :authenticate_user!
   before_action :connect_user!, except:[:account_connection]
   before_action :connected_user!, only:[:account_connection]
-  before_action :get_bot, only: [:show, :edit, :update, :destroy]
+  before_action :set_bot, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, if: Proc.new {|c| c.request.format.json? }
+
+  authorize_resource
 
   # GET /bots
   # GET /bots.json
@@ -75,7 +77,7 @@ class BotsController < ApplicationController
   end
 
   private
-    def get_bot
+    def set_bot
       @bot = Bot.find(params[:id])
     end
 

@@ -63,6 +63,7 @@ GEM
       sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
+    cancancan (2.2.0)
     capybara (3.1.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -239,6 +240,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.1)
   byebug
+  cancancan (~> 2.0)
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
   codemirror-rails
