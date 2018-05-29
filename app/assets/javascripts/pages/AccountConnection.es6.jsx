@@ -3,7 +3,7 @@ class AccountConnection extends React.Component {
     super(props);
     this.initPusher = this.initPusher.bind(this);
     this.state = {
-      pendingClass: 'btn-outline-success disabled',
+      pendingClass: 'btn-outline-success disabled connection--pending',
       pendingContent: '인증 대기'
     }
   }
@@ -15,7 +15,7 @@ class AccountConnection extends React.Component {
     channel.bind('cennection-success', (data) => {
       if (data.code == this.props.connectionCode) {
         this.setState({
-          pendingClass: 'btn-success',
+          pendingClass: 'btn-success connection--success',
           pendingContent: '인증 완료'
         })
       }
@@ -39,8 +39,11 @@ class AccountConnection extends React.Component {
               <span key={i} className="connection--code-char">{c}</span>
             ))}
           </div>
-          <div className="connection--pending">
-            <a href="/bots" className={`btn ${this.state.pendingClass}`}>{this.state.pendingContent}</a>
+          <div className="connection--button">
+            <a href="/bots" className={`btn ${this.state.pendingClass}`}>
+              {this.state.pendingContent}
+              <div className="border--spinner"></div>
+            </a>
           </div>
         </div>
       </div>
