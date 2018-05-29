@@ -46,9 +46,9 @@ class BotsController < ApplicationController
   # PATCH/PUT /bots/1
   # PATCH/PUT /bots/1.json
   def update
-    @bot = @bot.fork(current_user) if @bot.user.id == 1 && current_user.id != 1
+    @bot = @bot.fork(current_user) if @bot.template? && !current_user.admin?
     respond_to do |format|
-      if @bot.update(bot_params.except(:user_id))
+      if @bot.update_attributes(bot_params)
         format.html { redirect_to @bot, notice: 'Bot was successfully updated.' }
         format.json { render :show, status: :ok, location: @bot }
       else
@@ -82,7 +82,7 @@ class BotsController < ApplicationController
     end
 
     def bot_params
-      params.require(:bot).permit(:prepend, :append, :message, :response)
+      params.require(:bot).permit(:prepend, :append, :message, :response, :template)
     end
 
     def connect_user!

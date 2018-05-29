@@ -35,6 +35,10 @@ class User < ApplicationRecord
     end
   end
 
+  def admin?
+    self.role == 'admin'
+  end
+
   # For username sign in
   def email_required?
     false

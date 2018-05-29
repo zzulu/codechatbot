@@ -19,6 +19,7 @@ class NewBot extends React.Component {
             <BotForm
               formAuthenticityToken={this.props.formAuthenticityToken}
               method="post"
+              role={this.props.role}
               bot={this.props.bot}
               runCode={this.runCode}
               errors={this.props.errors} />

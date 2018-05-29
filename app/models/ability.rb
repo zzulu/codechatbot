@@ -4,8 +4,13 @@ class Ability
   def initialize(user)
     if user.present?
       can :account_connection, Bot
-      can :manage, Bot do |bot|
-        bot.user_id.nil? || bot.user_id == user.id
+      can [:read, :update], Bot, user_id: nil
+      can :manage, Bot, user_id: user.id
+      # can :run_code, Bot do |bot|
+      #   bot.template? || bot.user_id == user.id
+      # end
+      if user.admin?
+        can :manage, Bot
       end
     end
     # Define abilities for the passed in user here. For example:

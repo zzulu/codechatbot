@@ -1,1 +1,3 @@
-<%= react_component('IndexBots', {bots: @bots})%>
+<%= react_component('IndexBots', {
+      bots: @bots.as_json
+    }) %>

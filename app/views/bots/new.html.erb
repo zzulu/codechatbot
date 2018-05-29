@@ -2,4 +2,5 @@
       form_authenticity_token: form_authenticity_token,
       bot: @bot.as_json,
       errors: @bot.errors.as_json, 
+      role: current_user.role
     }) %>

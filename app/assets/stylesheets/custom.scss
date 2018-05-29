@@ -174,3 +174,15 @@ label {
     margin-top: 2rem;
   }
 }
+
+// tag
+.tag {
+  &--tamplate {
+    font-size: 0.75rem;
+    padding: .25em .4em;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    color: $oc-gray-7;
+    background-color: $oc-gray-0;
+  }
+}

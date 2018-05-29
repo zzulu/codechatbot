@@ -3,9 +3,10 @@ class BotForm extends React.Component {
     super(props);
     this.initCodeMirror = this.initCodeMirror.bind(this);
     this.state = {
-      bot_id: this.props.bot.id ? `/${this.props.bot.id}`:'',
+      botId: this.props.bot.id ? `/${this.props.bot.id}`:'',
       message: this.props.bot.message ? this.props.bot.message:'',
       response: this.props.bot.response ? this.props.bot.response:'',
+      template: this.props.bot.userId ? false : true,
       errorsClass: {
         message: this.props.errors.message ? 'is-invalid':''
       }
@@ -39,6 +40,17 @@ class BotForm extends React.Component {
     this.initCodeMirror();
   }
 
+  renderTemplateCheckbox(template, role) {
+    if(role === 'admin') {
+      return(
+        <div className="custom-control custom-checkbox mb-3">
+          <input type="checkbox" id="bot_template" className="custom-control-input" name="bot[template]" defaultChecked={template} onChange={(e)=>this.setState({template: e.target.checked})} />
+          <label className="custom-control-label" htmlFor="bot_template">이 챗봇은 템플릿 입니다.</label>
+        </div>
+      );
+    }
+  }
+
   renderErrorMessage(message) {
     return(
       <small className="form-text invalid-feedback">{message}</small>
@@ -55,7 +67,7 @@ class BotForm extends React.Component {
 
   render () {
     return (
-      <form action={`/bots${this.state.bot_id}`} method="post" encType="multipart/form-data" acceptCharset="UTF-8">
+      <form action={`/bots${this.state.botId}`} method="post" encType="multipart/form-data" acceptCharset="UTF-8">
         <input name="utf8" type="hidden" value="✓" />
         {this.renderMethod(this.props.method)}
         <input type="hidden" name="authenticity_token" value={this.props.formAuthenticityToken} />
@@ -69,6 +81,8 @@ class BotForm extends React.Component {
           <textarea ref="codeEditor" className="form-control" name="bot[response]" value={this.state.response} readOnly={true} rows="10"></textarea>
         </div>
 
+        {this.renderTemplateCheckbox(this.state.template, this.props.role)}
+
         <div className="d-flex justify-content-between pb-3">
           <button type="submit" className="btn btn-primary">저장</button>
           <button type="button" className="btn btn-success" onClick={()=>this.props.runCode(this.state.response)}>실행</button>
@@ -81,6 +95,7 @@ class BotForm extends React.Component {
 BotForm.propTypes = {
   formAuthenticityToken: PropTypes.string,
   method: PropTypes.string,
+  role: PropTypes.string,
   bot: PropTypes.object,
   errors: PropTypes.object
 };
