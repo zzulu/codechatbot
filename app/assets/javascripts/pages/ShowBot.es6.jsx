@@ -15,7 +15,7 @@ class ShowBot extends React.Component {
   renderTag(userId) {
     if(!userId) {
       return(
-        <span className="tag--tamplate">템플릿</span>
+        <span className="tag--tamplate ml-2">템플릿</span>
       );
     }
   }
