@@ -15,6 +15,8 @@ gem 'font-awesome-sass', '~> 5.0.13'
 
 gem 'cancancan', '~> 2.0'
 
+gem 'pusher'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use mysql as the database for Active Record
