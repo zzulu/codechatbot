@@ -68,9 +68,10 @@ class BotsController < ApplicationController
     end
   end
 
+  # POST /bots/run_code
   def run_code
-    ret = Bot.run_code(params[:code])
-    render :json => {result: ret}
+    result = Bot.run_code(params[:code])
+    render json: {result: result}
   end
 
   def account_connection

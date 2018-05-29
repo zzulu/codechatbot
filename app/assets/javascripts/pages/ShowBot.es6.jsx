@@ -9,7 +9,12 @@ class ShowBot extends React.Component {
   }
 
   runCode(response) {
-    this.setState({ result: response });
+    $.ajax({
+      url: `/bots/run_code`, type: 'POST', dataType: 'json',
+      data: { code: response }
+    }).done((response)=>{
+      this.setState({ result: response.result });
+    });
   }
 
   renderTag(userId) {
