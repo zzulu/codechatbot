@@ -1,10 +1,29 @@
 class AccountConnection extends React.Component {
   constructor(props) {
     super(props);
+    this.initPusher = this.initPusher.bind(this);
     this.state = {
       pendingClass: 'btn-outline-success disabled',
-      pendingContent: '인증 대기 중'
+      pendingContent: '인증 대기'
     }
+  }
+
+  initPusher() {
+    pusher = new Pusher(this.props.pusherKey, { cluster: 'ap1', encrypted: true });
+
+    channel = pusher.subscribe('account-connection');
+    channel.bind('cennection-success', (data) => {
+      if (data.code == this.props.connectionCode) {
+        this.setState({
+          pendingClass: 'btn-success',
+          pendingContent: '인증 완료'
+        })
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.initPusher();
   }
 
   render() {
@@ -21,7 +40,7 @@ class AccountConnection extends React.Component {
             ))}
           </div>
           <div className="connection--pending">
-            <a href="/" className={`btn ${this.state.pendingClass}`}>{this.state.pendingContent}</a>
+            <a href="/bots" className={`btn ${this.state.pendingClass}`}>{this.state.pendingContent}</a>
           </div>
         </div>
       </div>
@@ -30,5 +49,6 @@ class AccountConnection extends React.Component {
 }
 
 AccountConnection.propTypes = {
-  connectionCode: PropTypes.string
+  connectionCode: PropTypes.string,
+  pusherKey: PropTypes.string
 }
