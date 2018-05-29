@@ -1,5 +1,10 @@
 # Ruby Chatbot
 
+## release 0.1.3
+- Add errors page
+- Change some words
+- Fix minor bugs
+
 ## release 0.1.2
 - Add run_code with docker container
 
