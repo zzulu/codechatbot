@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :trackable, :validatable
+  devise :database_authenticatable, :registerable, :trackable, :validatable
 
   has_many :bots
 
@@ -34,6 +33,10 @@ class User < ApplicationRecord
     else
       nil
     end
+  end
+
+  def admin?
+    self.role == 'admin'
   end
 
   # For username sign in

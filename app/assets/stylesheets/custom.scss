@@ -156,7 +156,13 @@ label {
   &--intro {
     color: $oc-gray-0;
     background-color: $oc-gray-9;
+    width: 45vw;
     padding: 25vh 3rem;
+
+    @include media-breakpoint-down(md) {
+      width: auto;
+      padding: 3rem;
+    }
 
     h2:not(:last-child) {
       color: $oc-gray-6;
@@ -165,10 +171,26 @@ label {
   }
 
   &--form {
-    padding: 25vh 2rem;
+    width: 55vw;
+    padding: 25vh 4rem;
+
+    @include media-breakpoint-down(md) {
+      width: auto;
+      padding: 3rem;
+    }
   }
 
   &--button {
     margin-top: 2rem;
+  }
+}
+
+// tag
+.tag {
+  &--tamplate {
+    font-size: 0.75rem;
+    padding: .25em .4em;
+    color: $oc-gray-7;
+    background-color: $oc-gray-0;
   }
 }
