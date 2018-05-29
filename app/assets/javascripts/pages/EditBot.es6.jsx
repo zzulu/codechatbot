@@ -20,7 +20,8 @@ class EditBot extends React.Component {
               formAuthenticityToken={this.props.formAuthenticityToken}
               method="put"
               bot={this.props.bot}
-              runCode={this.runCode}/>
+              runCode={this.runCode}
+              errors={this.props.errors} />
           </div>
           <div className="col-12 col-lg-6">
             <BotResult result={this.state.result}/>
@@ -33,5 +34,6 @@ class EditBot extends React.Component {
 
 EditBot.propTypes = {
   formAuthenticityToken: PropTypes.string,
-  bot: PropTypes.object
+  bot: PropTypes.object,
+  errors: PropTypes.object
 };
