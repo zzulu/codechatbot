@@ -63,7 +63,7 @@ class ApiController < ApplicationController
         elsif @content.length == 4 && @content.match(/[a-z0-9]{4}/i).present?
           render json: {'message': {'text': '인증 코드가 만료 되었거나, 잘못된 인증 코드를 입력하셨습니다.'}}
         else
-          render json: {'message': {'text': '계정 연동이 되어있지 않습니다. https://rb.likelion.io에서 계정 생성 후, 계정 연동을 진행해 주시기 바랍니다.'}}
+          render json: {'message': {'text': '계정 연동이 되어있지 않습니다. https://rb.likelion.io 에서 계정 생성 후, 계정 연동을 진행해 주시기 바랍니다.'}}
         end
       end
     end
