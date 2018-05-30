@@ -1,5 +1,8 @@
 # Ruby Chatbot
 
+### hotfix 0.1.6
+- Fix bugs(Wrong default loading state value in ShowBot page)
+
 ### release 0.1.5
 - Add result loading spinner
 - Fix some words
