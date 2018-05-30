@@ -5,7 +5,7 @@ class ShowBot extends React.Component {
       template: this.props.bot.userId ? false : true,
       forked: this.props.bot.parentId ? true : false,
       result: '',
-      loading: true
+      loading: false
     }
   }
 
