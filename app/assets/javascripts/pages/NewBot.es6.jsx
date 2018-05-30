@@ -3,16 +3,18 @@ class NewBot extends React.Component {
     super(props);
     this.runCode = this.runCode.bind(this);
     this.state = {
-      result: ''
+      result: '',
+      loading: false
     }
   }
 
   runCode(response) {
+    this.setState({ loading: true });
     $.ajax({
       url: `/bots/run_code`, type: 'POST', dataType: 'json',
       data: { code: response }
     }).done((response)=>{
-      this.setState({ result: response.result });
+      this.setState({ result: response.result, loading: false });
     });
   }
 
@@ -30,7 +32,7 @@ class NewBot extends React.Component {
               errors={this.props.errors} />
           </div>
           <div className="col-12 col-lg-6">
-            <BotResult result={this.state.result}/>
+            <BotResult result={this.state.result} loading={this.state.loading} />
           </div>
         </div>
       </div>

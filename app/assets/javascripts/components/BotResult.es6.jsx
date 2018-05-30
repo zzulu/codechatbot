@@ -1,25 +1,29 @@
 class BotResult extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      result: this.props.result || ''
+  renderResult(loading) {
+    if(loading) {
+      return(
+        <ResultSpinner/>
+      );
+    } else {
+      return(
+        <pre>{this.props.result}</pre>
+      );
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({result: nextProps.result});
   }
 
   render(){
     return(
       <React.Fragment>
         <label>실행 결과</label>
-        <pre className="bot--result">{this.state.result}</pre>
+        <div className="bot--result">
+          {this.renderResult(this.props.loading)}
+        </div>
       </React.Fragment>
     );
   }
 }
 
 BotResult.propTypes = {
+  loading: PropTypes.bool,
   result: PropTypes.string
 }

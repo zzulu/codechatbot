@@ -4,16 +4,18 @@ class ShowBot extends React.Component {
     this.state = {
       template: this.props.bot.userId ? false : true,
       forked: this.props.bot.parentId ? true : false,
-      result: ''
+      result: '',
+      loading: true
     }
   }
 
   runCode(response) {
+    this.setState({ loading: true });
     $.ajax({
       url: `/bots/run_code`, type: 'POST', dataType: 'json',
       data: { code: response }
     }).done((response)=>{
-      this.setState({ result: response.result });
+      this.setState({ result: response.result, loading: false });
     });
   }
 
@@ -67,7 +69,7 @@ class ShowBot extends React.Component {
             </div>
           </div>
           <div className="col-12 col-lg-6">
-            <BotResult result={this.state.result}/>
+            <BotResult result={this.state.result} loading={this.state.loading} />
           </div>
         </div>
       </div>
