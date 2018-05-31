@@ -1,4 +1,6 @@
 <%= react_component('AccountConnection',{
       connection_code: current_user.connection_code,
-      pusher_key: Rails.application.credentials.dig(:pusher, :key).to_s
+      pusher_key: Rails.application.credentials.dig(:pusher, :key).to_s,
+      header: '계정 연결 코드',
+      text: '카카오톡 계정 연결을 위하여, 루비챗봇 플러스 친구 대화방에서 아래의 코드를 입력하세요.'
     }) %>
