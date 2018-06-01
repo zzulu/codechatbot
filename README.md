@@ -1,5 +1,9 @@
 # Ruby Chatbot
 
+### release 0.1.9
+- Fix favicon bug
+- Add disabled state as user run code
+
 ### hotfix 0.1.8
 - Add migration for reset_password_token
 

@@ -85,7 +85,7 @@ class BotForm extends React.Component {
 
         <div className="d-flex justify-content-between pb-3">
           <button type="submit" className="btn btn-primary">저장</button>
-          <button type="button" className="btn btn-success" onClick={()=>this.props.runCode(this.state.response)}>실행</button>
+          <button type="button" className="btn btn-success" onClick={()=>this.props.runCode(this.state.response)} disabled={this.props.loading}>실행</button>
         </div>
       </form>
     );
@@ -97,7 +97,8 @@ BotForm.propTypes = {
   method: PropTypes.string,
   role: PropTypes.string,
   bot: PropTypes.object,
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  loading: PropTypes.bool
 };
 
 BotForm.defaultProps = {
