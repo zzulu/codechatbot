@@ -1,16 +1,26 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="d-flex flex-column flex-lg-row user">
+  <div class="d-flex flex-row flex-lg-column user--intro">
+    <h2>루비챗봇</h2>
+    <h2 class="ml-2 ml-lg-0">비밀번호 재설정</h2>
   </div>
+  
+  <div class="d-flex flex-column user--form">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="form-group">
+        <%= f.label :username, '이름' %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "off", class: "form-control #{form_invalid(resource, :username)}" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+      <% if flash.present? %>
+        <% flash.each do |key, message| %>
+          <small class="form-text text-muted"><%= message %></small>
+        <% end %>
+      <% end %>
+
+      <div class="user--button">
+        <%= f.submit "계정 인증", class: "btn btn-primary" %>
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

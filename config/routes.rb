@@ -3,11 +3,15 @@ Rails.application.routes.draw do
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
 
-  devise_for :users, controllers: {'registrations': 'users/registrations'}
+  devise_for :users, controllers: {
+                        'registrations': 'users/registrations',
+                        'passwords': 'users/passwords'
+                      }
 
   devise_scope :user do
     root to: 'devise/sessions#new'
     post 'users/disconnect', to: 'users/registrations#disconnect'
+    get 'users/account_authentication', to: 'users/passwords#account_authentication', as: :account_authentication
   end
 
   get 'account_connection', to: 'bots#account_connection', as: :account_connection

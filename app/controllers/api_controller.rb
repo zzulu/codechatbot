@@ -65,6 +65,10 @@ class ApiController < ApplicationController
         else
           render json: {'message': {'text': '계정 연동이 되어있지 않습니다. https://rb.likelion.io 에서 계정 생성 후, 계정 연동을 진행해 주시기 바랍니다.'}}
         end
+      elsif @user.connection_code.present?
+        if @user.authentication_for_reset_password(params[:user_key], @content)
+          render json: {'message': {'text': "계정이 인증되었습니다. \'인증 완료\' 버튼을 클릭하여 비밀번호 재설정을 진행해 주시기 바랍니다."}}
+        end
       end
     end
 

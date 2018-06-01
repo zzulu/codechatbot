@@ -15,6 +15,8 @@ class EditBot extends React.Component {
       data: { code: response }
     }).done((response)=>{
       this.setState({ result: response.result, loading: false });
+    }).fail((error)=>{
+      this.setState({ result: `${error.statusText} (${error.status})`, loading: false})
     });
   }
 

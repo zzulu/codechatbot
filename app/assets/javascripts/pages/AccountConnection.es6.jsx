@@ -4,20 +4,34 @@ class AccountConnection extends React.Component {
     this.initPusher = this.initPusher.bind(this);
     this.state = {
       pendingClass: 'btn-outline-success disabled connection--pending',
-      pendingContent: '인증 대기'
+      pendingContent: '인증 대기',
+      redirectPath: this.props.redirectPath
     }
   }
 
   initPusher() {
-    pusher = new Pusher(this.props.pusherKey, { cluster: 'ap1', encrypted: true });
+    this.pusher = new Pusher(this.props.pusherKey, { cluster: 'ap1', encrypted: true });
 
-    channel = pusher.subscribe('account-connection');
-    channel.bind('cennection-success', (data) => {
-      if (data.code == this.props.connectionCode) {
+    channel = this.pusher.subscribe(`account-connection-${this.props.connectionCode}`);
+
+    channel.bind('connected', (data) => {
+      if(this.props.connectionCode == data.code) {
         this.setState({
           pendingClass: 'btn-success connection--success',
           pendingContent: '인증 완료'
-        })
+        });
+        this.pusher.unsubscribe(`account-connection-${this.props.connectionCode}`);
+      }
+    });
+
+    channel.bind('authenticated', (data) => {
+      if(data.token) {
+        this.setState({
+          pendingClass: 'btn-success connection--success',
+          pendingContent: '인증 완료',
+          redirectPath: `${this.state.redirectPath}?reset_password_token=${data.token}`
+        });
+        this.pusher.unsubscribe(`account-connection-${this.props.connectionCode}`);
       }
     });
   }
@@ -26,13 +40,17 @@ class AccountConnection extends React.Component {
     this.initPusher();
   }
 
+  componentWillUnmount() {
+    this.pusher.disconnect();
+  }
+
   render() {
     return(
       <div className="container">
         <div className="connection">
-          <h3>계정 연결 코드</h3>
+          <h3>{this.props.header}</h3>
           <p className="connection--text">
-            카카오톡 계정 연결을 위하여, 루비챗봇 플러스 친구 대화방에서 아래의 코드를 입력하세요.
+            {this.props.text}
           </p>
           <div className="connection--code-wrapper">
             {this.props.connectionCode.split('').map((c, i)=>(
@@ -40,7 +58,7 @@ class AccountConnection extends React.Component {
             ))}
           </div>
           <div className="connection--button">
-            <a href="/bots" className={`btn ${this.state.pendingClass}`}>
+            <a href={this.state.redirectPath} className={`btn ${this.state.pendingClass}`}>
               {this.state.pendingContent}
               <div className="border--spinner"></div>
             </a>
