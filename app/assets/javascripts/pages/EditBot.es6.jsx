@@ -31,7 +31,8 @@ class EditBot extends React.Component {
               role={this.props.role}
               bot={this.props.bot}
               runCode={this.runCode}
-              errors={this.props.errors} />
+              errors={this.props.errors}
+              loading={this.state.loading} />
           </div>
           <div className="col-12 col-lg-6">
             <BotResult result={this.state.result} loading={this.state.loading} />
