@@ -2,7 +2,6 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeBots: this.props.controller === 'bots' ? 'active':'',
       activeUsers: this.props.controller === 'devise/registrations' ? 'active':''
     }
   }
@@ -27,4 +26,12 @@ class Navbar extends React.Component {
       </nav>
     );
   }
+}
+
+Navbar.propTypes = {
+  root_path: PropTypes.string,
+  edit_user_registration_path: PropTypes.string,
+  destroy_user_session_path: PropTypes.string,
+  controller: PropTypes.string,
+  username: PropTypes.string,
 }

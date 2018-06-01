@@ -4,7 +4,8 @@ class AccountConnection extends React.Component {
     this.initPusher = this.initPusher.bind(this);
     this.state = {
       pendingClass: 'btn-outline-success disabled connection--pending',
-      pendingContent: '인증 대기'
+      pendingContent: '인증 대기',
+      redirectPath: this.props.redirectPath
     }
   }
 
@@ -12,11 +13,23 @@ class AccountConnection extends React.Component {
     this.pusher = new Pusher(this.props.pusherKey, { cluster: 'ap1', encrypted: true });
 
     channel = this.pusher.subscribe(`account-connection-${this.props.connectionCode}`);
+
     channel.bind('connected', (data) => {
       if(this.props.connectionCode == data.code) {
         this.setState({
           pendingClass: 'btn-success connection--success',
           pendingContent: '인증 완료'
+        });
+        this.pusher.unsubscribe(`account-connection-${this.props.connectionCode}`);
+      }
+    });
+
+    channel.bind('authenticated', (data) => {
+      if(data.token) {
+        this.setState({
+          pendingClass: 'btn-success connection--success',
+          pendingContent: '인증 완료',
+          redirectPath: `${this.state.redirectPath}?reset_password_token=${data.token}`
         });
         this.pusher.unsubscribe(`account-connection-${this.props.connectionCode}`);
       }
@@ -45,7 +58,7 @@ class AccountConnection extends React.Component {
             ))}
           </div>
           <div className="connection--button">
-            <a href="/bots" className={`btn ${this.state.pendingClass}`}>
+            <a href={this.state.redirectPath} className={`btn ${this.state.pendingClass}`}>
               {this.state.pendingContent}
               <div className="border--spinner"></div>
             </a>
