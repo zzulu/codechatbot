@@ -1,5 +1,9 @@
 # Ruby Chatbot
 
+### release 0.1.7
+- Add reset password feature
+- Fix some details
+
 ### hotfix 0.1.6
 - Fix bugs(Wrong default loading state value in ShowBot page)
 
