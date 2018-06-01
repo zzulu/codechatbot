@@ -1,5 +1,8 @@
 # Ruby Chatbot
 
+### hotfix 0.1.8
+- Add migration for reset_password_token
+
 ### release 0.1.7
 - Add reset password feature
 - Fix some details
