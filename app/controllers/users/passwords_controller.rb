@@ -12,10 +12,10 @@ class Users::PasswordsController < Devise::PasswordsController
     self.resource = resource_class.find_or_initialize_by(params.require(:user).permit(:username))
     if resource.new_record?
       flash[:notice] = "계정이 존재하지 않습니다."
-      render :new
+      redirect_to new_user_password_path
     elsif resource.user_key.nil?
       flash[:notice] = "계정 연결이 되어 있지 않은 계정은 비밀번호 재설정을 진행할 수 없습니다."
-      render :new
+      redirect_to new_user_password_path
     else
       resource.set_connection_code
       redirect_to account_authentication_path(code: resource.connection_code)
