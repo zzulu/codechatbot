@@ -9,11 +9,11 @@ class ShowBot extends React.Component {
     }
   }
 
-  runCode(response) {
+  runCode(prepend, response) {
     this.setState({ loading: true });
     $.ajax({
       url: `/bots/run_code`, type: 'POST', dataType: 'json',
-      data: { code: response }
+      data: { prepend: prepend, code: response }
     }).done((response)=>{
       this.setState({ result: response.result, loading: false });
     }).fail((error)=>{
@@ -67,7 +67,7 @@ class ShowBot extends React.Component {
                 {this.renderButton(this.props.bot.id, this.state.template, this.state.forked, this.props.role)}
                 <a href="/bots" className="btn btn-secondary">목록</a>
               </div>
-              <button className="btn btn-success" onClick={()=>this.runCode(this.props.bot.response)} disabled={this.state.loading}>실행</button>
+              <button className="btn btn-success" onClick={()=>this.runCode(this.props.bot.prepend, this.props.bot.response)} disabled={this.state.loading}>실행</button>
             </div>
           </div>
           <div className="col-12 col-lg-6">
