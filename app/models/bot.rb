@@ -39,6 +39,6 @@ class Bot < ApplicationRecord
 
   def fork(user)
     # Clone bot
-    Bot.create(user_id: user.id, parent_id: self.id, message: self.message, response: self.response)
+    Bot.create(user_id: user.id, parent_id: self.id, message: self.message, prepend: self.prepend, response: self.response)
   end
  end

@@ -1,7 +1,8 @@
 # Ruby Chatbot
 
-### hotfix 0.1.11
+### hotfix 0.1.11-12
 - Fix bug (Encoding error for korean, so rolled back)
+- Fix bug (Set prepend when user fork the template)
 
 ### release 0.1.10
 - Fix encoding bug when user run the codes
