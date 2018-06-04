@@ -5,6 +5,7 @@ class BotForm extends React.Component {
     this.state = {
       botId: this.props.bot.id ? `/${this.props.bot.id}`:'',
       message: this.props.bot.message ? this.props.bot.message:'',
+      prepend: this.props.bot.prepend ? this.props.bot.prepend:'',
       response: this.props.bot.response ? this.props.bot.response:'',
       template: this.props.bot.userId ? false : true,
       errorsClass: {
@@ -24,20 +25,41 @@ class BotForm extends React.Component {
   }
 
   initCodeMirror() {
-    editor = CodeMirror.fromTextArea(this.refs.codeEditor, {
+    options = {
       lineNumbers: true,
       mode: 'ruby',
       theme: 'monokai',
       extraKeys: { Tab: this.betterTab }
-    });
+    }
+
+    editor = CodeMirror.fromTextArea(this.refs.codeEditor, options);
 
     editor.on("change", (cm) => {
       this.setState({response: cm.getValue()});
-    })
+    });
+
+    if(this.props.role === 'admin') {
+      prependEditor = CodeMirror.fromTextArea(this.refs.prependCodeEditor, options);
+
+      prependEditor.on("change", (cm) => {
+        this.setState({prepend: cm.getValue()});
+      });
+    }
   }
 
   componentDidMount() {
     this.initCodeMirror();
+  }
+
+  renderPrependResponse(prepend, role) {
+    if(role === 'admin') {
+      return(
+        <div className="form-group">
+          <label htmlFor="bot_prepend">앞에 붙는 코드</label>
+          <textarea ref="prependCodeEditor" className="form-control" name="bot[prepend]" value={prepend} readOnly={true} rows="10"></textarea>
+        </div>
+      );
+    }
   }
 
   renderTemplateCheckbox(template, role) {
@@ -76,6 +98,9 @@ class BotForm extends React.Component {
           <input type="text" id="bot_message" name="bot[message]" value={this.state.message} onChange={(e)=>this.setState({message: e.target.value})} className={`form-control ${this.state.errorsClass.message}`} autoComplete="off" />
           {this.renderErrorMessage(this.props.errors.message)}
         </div>
+
+        {this.renderPrependResponse(this.state.prepend, this.props.role)}
+
         <div className="form-group">
           <label htmlFor="bot_response" className="required">답변 코드</label>
           <textarea ref="codeEditor" className="form-control" name="bot[response]" value={this.state.response} readOnly={true} rows="10"></textarea>
@@ -85,7 +110,7 @@ class BotForm extends React.Component {
 
         <div className="d-flex justify-content-between pb-3">
           <button type="submit" className="btn btn-primary">저장</button>
-          <button type="button" className="btn btn-success" onClick={()=>this.props.runCode(this.state.response)} disabled={this.props.loading}>실행</button>
+          <button type="button" className="btn btn-success" onClick={()=>this.props.runCode(this.state.prepend, this.state.response)} disabled={this.props.loading}>실행</button>
         </div>
       </form>
     );

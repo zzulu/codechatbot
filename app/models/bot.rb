@@ -19,8 +19,8 @@ class Bot < ApplicationRecord
     self.user_id.nil?
   end
 
-  def self.run_code(code)
-    code = "require 'timeout'\r\nTimeout::timeout(2) do\r\n#{code}\r\nend"
+  def self.run_code(prepend, code)
+    code = "require 'timeout'\r\nTimeout::timeout(2) do\r\n#{prepend}\r\n\r\n#{code}\r\nend"
     tmp_path = '/home/ubuntu/rubychatbot/tmp/'
     file = Tempfile.new(['','.rb'], tmp_path)
     begin
@@ -30,11 +30,11 @@ class Bot < ApplicationRecord
       result = `sudo docker run -t --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app ruby-custom-gem ruby #{file.path.gsub(tmp_path,'')} 2>&1`
       file.unlink
     end
-    return result
+    return result.force_encoding('ISO-8859-1').encode('UTF-8') # Force encoding
   end
 
   def run_code
-    Bot.run_code(self.response)
+    Bot.run_code(self.prepend, self.response)
   end
 
   def fork(user)
