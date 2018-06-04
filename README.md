@@ -1,5 +1,9 @@
 # Ruby Chatbot
 
+### release 0.1.10
+- Fix encoding bug when user run the codes
+- Add prepend codes for admin
+
 ### release 0.1.9
 - Fix favicon bug
 - Add disabled state as user run code
