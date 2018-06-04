@@ -30,7 +30,7 @@ class Bot < ApplicationRecord
       result = `sudo docker run -t --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app ruby-custom-gem ruby #{file.path.gsub(tmp_path,'')} 2>&1`
       file.unlink
     end
-    return result
+    return result.force_encoding('ISO-8859-1').encode('UTF-8') # Force encoding
   end
 
   def run_code
