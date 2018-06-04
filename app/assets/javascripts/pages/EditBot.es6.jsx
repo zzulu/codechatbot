@@ -8,11 +8,11 @@ class EditBot extends React.Component {
     }
   }
 
-  runCode(response) {
+  runCode(prepend, response) {
     this.setState({ loading: true });
     $.ajax({
       url: `/bots/run_code`, type: 'POST', dataType: 'json',
-      data: { code: response }
+      data: { prepend: prepend, code: response }
     }).done((response)=>{
       this.setState({ result: response.result, loading: false });
     }).fail((error)=>{
