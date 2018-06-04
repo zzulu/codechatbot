@@ -1,5 +1,8 @@
 # Ruby Chatbot
 
+### hotfix 0.1.11
+- Fix bug (Encoding error for korean, so rolled back)
+
 ### release 0.1.10
 - Fix encoding bug when user run the codes
 - Add prepend codes for admin
