@@ -54,7 +54,7 @@ class BotForm extends React.Component {
   renderPrependResponse(prepend, role) {
     if(role === 'admin') {
       return(
-        <div className="form-group">
+        <div className="form-group height-half">
           <label htmlFor="bot_prepend">앞에 붙는 코드</label>
           <textarea ref="prependCodeEditor" className="form-control" name="bot[prepend]" value={prepend} readOnly={true} rows="10"></textarea>
         </div>
