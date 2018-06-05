@@ -41,6 +41,12 @@ label {
   }
 }
 
+.height-half {
+  .CodeMirror {
+    height: 150px;
+  }
+}
+
 .hide {
   display: none !important;
 }
