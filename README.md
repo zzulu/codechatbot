@@ -1,9 +1,10 @@
 # Ruby Chatbot
 
-### hotfix 0.1.11-0.1.13
+### hotfix 0.1.11-0.1.14
 - Fix bug (Encoding error for korean, so rolled back)
 - Fix bug (Set prepend when user fork the template)
 - Change timeout 2s to 3s
+- Add 'height-half' class to prepend codemirror
 
 ### release 0.1.10
 - Fix encoding bug when user run the codes
