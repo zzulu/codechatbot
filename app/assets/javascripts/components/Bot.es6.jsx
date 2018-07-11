@@ -1,8 +1,8 @@
 class Bot extends React.Component {
-  renderButton(editing, userId, parentId, id) {
+  renderButton(editing, userId, parentId, botId) {
     if(editing && userId && !parentId) {
       return(
-        <span className="item--button" onClick={()=>this.props.deleteBot(this.props.bot.id)}><i className="fas fa-times"></i></span>
+        <span className="item--button" onClick={()=>this.props.deleteBot(botId)}><i className="fas fa-times"></i></span>
       );
     }
   }
