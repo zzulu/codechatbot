@@ -1,7 +1,8 @@
 # Ruby Chatbot
 
-### hotfix 0.1.15
+### hotfix 0.1.15-0.1.16
 - Fix some wrong codes
+- Fix words
 
 ### hotfix 0.1.11-0.1.14
 - Fix bug (Encoding error for korean, so rolled back)
