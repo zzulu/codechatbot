@@ -20,5 +20,5 @@
 //= require react_ujs
 //= require components
 //= require codemirror
-//= require codemirror_mode
+//= require codemirror_modes
 //= require custom
