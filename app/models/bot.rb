@@ -23,8 +23,8 @@ class Bot < ApplicationRecord
     Bot.create(user_id: user.id, parent_id: self.id, message: self.message, prepend: self.prepend, response: self.response)
   end
 
-  def run_code # Only called via Kakaotalk, so bot.user always exists.
-    Bot.run_code(self.user.id, self.prepend, self.response)
+  def run_code
+    Bot.run_code(self.user.&id || 0, self.prepend, self.response)
   end
 
   require 'timeout'
