@@ -31,3 +31,7 @@
 
 # macOS files
 .DS_Store
+
+# For Code Chatbot tmp codes dir
+!/tmp/codes/
+!/tmp/codes/.keep

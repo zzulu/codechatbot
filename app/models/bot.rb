@@ -30,7 +30,8 @@ class Bot < ApplicationRecord
   require 'timeout'
   def self.run_code(user_id, prepend, code)
     code = "#{prepend}\r\n\r\n#{code}"
-    tmp_path = "/home/ubuntu/codechatbot/tmp/#{user_id}/"
+    tmp_path = Rails.root.join('tmp','codes',"#{user_id}")
+    Dir.mkdir(tmp_path) unless File.exist?(tmp_path)
     file = Tempfile.new(['',".#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' }}"], tmp_path)
     container_name = File.basename(file,".#{ENV.fetch('CHATBOT_LANGUAGE_EXTENSION') { 'rb' }}")
     begin
