@@ -27,7 +27,7 @@ class BotForm extends React.Component {
   initCodeMirror() {
     options = {
       lineNumbers: true,
-      mode: 'ruby',
+      mode: this.props.mode,
       theme: 'monokai',
       extraKeys: { Tab: this.betterTab }
     }
@@ -123,7 +123,8 @@ BotForm.propTypes = {
   role: PropTypes.string,
   bot: PropTypes.object,
   errors: PropTypes.object,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  mode: PropTypes.string
 };
 
 BotForm.defaultProps = {

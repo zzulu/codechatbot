@@ -51,7 +51,7 @@ ko:
         action: "본인 계정 인증"
         greeting: "%{recipient}님 환영합니다!"
         instruction: "아래의 링크를 클릭하시면 이메일 인증이 완료됩니다:"
-        subject: "루비챗봇 이메일 인증 메일입니다."
+        subject: "코드 챗봇 이메일 인증 메일입니다."
       password_change:
         greeting:
         message:
@@ -62,13 +62,13 @@ ko:
         instruction: "누군가 당신의 비밀번호를 변경하는 링크를 요청했으며, 다음의 링크에서 비밀번호 변경이 가능합니다."
         instruction_2: "이를 요청하지 않으셨다면, 이 메일을 무시하십시오."
         instruction_3: "위 링크에 접속하여 새로운 비밀번호를 생성하기 전까지, 귀하의 비밀번호는 변경되지 않습니다."
-        subject: "루비챗봇 비밀번호 재설정 메일입니다."
+        subject: "코드 챗봇 비밀번호 재설정 메일입니다."
       unlock_instructions:
         action: "본인 계정 잠금 해제"
         greeting: "%{recipient}님 안녕하세요!"
         instruction: "계정 잠금을 해제하려면 아래 링크를 클릭하세요."
         message: "로그인 실패 횟수 초과로 귀하의 계정이 잠금 처리되었습니다."
-        subject: "루비챗봇 계정 잠금 해제 메일입니다."
+        subject: "코드 챗봇 계정 잠금 해제 메일입니다."
     omniauth_callbacks:
       failure: "%{reason}(으)로 인하여 %{kind}(으)로부터 인증받지 못했습니다."
       success: "%{kind} 계정으로부터 인증되었습니다."

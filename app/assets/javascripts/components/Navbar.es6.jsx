@@ -9,7 +9,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href={this.props.rootPath}>루비챗봇</a>
+        <a className="navbar-brand" href={this.props.rootPath}>{this.props.languageKo} 챗봇</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -34,4 +34,5 @@ Navbar.propTypes = {
   destroy_user_session_path: PropTypes.string,
   controller: PropTypes.string,
   username: PropTypes.string,
+  languageKo: PropTypes.string,
 }

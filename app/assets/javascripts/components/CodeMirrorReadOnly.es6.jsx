@@ -9,7 +9,7 @@ class CodeMirrorReadOnly extends React.Component {
   initCodeMirror() {
     CodeMirror.fromTextArea(this.refs.readOnlyEditor, {
       lineNumbers: true,
-      mode: 'ruby',
+      mode: this.props.mode,
       theme: 'monokai',
       readOnly: true
     });
@@ -30,7 +30,8 @@ class CodeMirrorReadOnly extends React.Component {
 
 CodeMirrorReadOnly.propTypes = {
   value: PropTypes.string,
-  heightAuto: PropTypes.bool
+  heightAuto: PropTypes.bool,
+  mode: PropTypes.string
 }
 
 CodeMirrorReadOnly.defaultProps = {
