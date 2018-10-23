@@ -32,7 +32,8 @@ class EditBot extends React.Component {
               bot={this.props.bot}
               runCode={this.runCode}
               errors={this.props.errors}
-              loading={this.state.loading} />
+              loading={this.state.loading}
+              mode={this.props.language_en} />
           </div>
           <div className="col-12 col-lg-6">
             <BotResult result={this.state.result} loading={this.state.loading} />
@@ -46,5 +47,6 @@ class EditBot extends React.Component {
 EditBot.propTypes = {
   formAuthenticityToken: PropTypes.string,
   bot: PropTypes.object,
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  language_en: PropTypes.string,
 };
