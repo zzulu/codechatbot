@@ -35,3 +35,6 @@
 # For Code Chatbot tmp codes dir
 !/tmp/codes/
 !/tmp/codes/.keep
+
+# Ignore application configuration
+/config/application.yml
