@@ -97,6 +97,8 @@ GEM
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
+    figaro (1.1.1)
+      thor (~> 0.14)
     font-awesome-sass (5.0.13)
       sassc (>= 1.11)
     globalid (0.4.1)
@@ -252,6 +254,7 @@ DEPENDENCIES
   codemirror-rails
   coffee-rails (~> 4.2)
   devise
+  figaro
   font-awesome-sass (~> 5.0.13)
   jbuilder (~> 2.5)
   jquery-rails
@@ -275,4 +278,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.16.2
+   1.16.6
