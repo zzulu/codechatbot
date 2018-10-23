@@ -60,7 +60,7 @@ class ShowBot extends React.Component {
             <p className="bot--message">{this.props.bot.message}</p>
 
             <label className="bot--label">답변 코드</label>
-            <CodeMirrorReadOnly value={this.props.bot.response} />
+            <CodeMirrorReadOnly value={this.props.bot.response} mode={this.props.languageEn} />
             
             <div className="d-flex justify-content-between py-3">
               <div className="bot--button">
@@ -80,5 +80,6 @@ class ShowBot extends React.Component {
 }
 
 ShowBot.propTypes = {
-  bot: PropTypes.object
+  bot: PropTypes.object,
+  languageEn: PropTypes.string,
 };

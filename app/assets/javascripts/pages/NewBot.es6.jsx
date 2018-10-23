@@ -33,7 +33,7 @@ class NewBot extends React.Component {
               runCode={this.runCode}
               errors={this.props.errors}
               loading={this.state.loading}
-              mode={this.props.language_en} />
+              mode={this.props.languageEn} />
           </div>
           <div className="col-12 col-lg-6">
             <BotResult result={this.state.result} loading={this.state.loading} />
@@ -48,5 +48,5 @@ NewBot.propTypes = {
   formAuthenticityToken: PropTypes.string,
   bot: PropTypes.object,
   errors: PropTypes.object,
-  language_en: PropTypes.string,
+  languageEn: PropTypes.string,
 };
