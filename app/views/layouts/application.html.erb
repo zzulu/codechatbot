@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>루비챗봇<%= yield(:title) %></title>
+    <title><%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇<%= yield(:title) %></title>
 
-    <meta name="description" content="Make your chatbot which can run ruby">
-    <meta name="application-name" content="LIKE LION">
-    <meta name="author" content="LIKE LION">
-    <meta property="og:title" content="루비챗봇">
+    <meta name="description" content="Make your chatbot which can run code">
+    <meta name="application-name" content="HPHK">
+    <meta name="author" content="HPHK">
+    <meta property="og:title" content="<%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rb.likelion.io">
-    <meta property="og:description" content="Make your chatbot which can run ruby">
+    <meta property="og:url" content="https://<%= ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' } %>.hphk.io">
+    <meta property="og:description" content="Make your chatbot which can run code">
     <meta property="og:image" content="<%= image_url('og-image.png') %>">
 
     <%= csrf_meta_tags %>
@@ -37,6 +37,7 @@
       destroy_user_session_path: destroy_user_session_path,
       controller: params[:controller],
       username: current_user.username,
+      language_ko: ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' },
     }, {prerender: true}) if user_signed_in? %>
     
     <%= yield %>

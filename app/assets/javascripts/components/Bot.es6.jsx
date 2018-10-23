@@ -24,7 +24,7 @@ class Bot extends React.Component {
           {this.renderButton(this.props.editing, this.props.bot.userId, this.props.bot.parentId, this.props.bot.id)}
         </div>
         <div className="col-12 col-sm-9">
-          <CodeMirrorReadOnly value={this.props.bot.response} heightAuto={true} />
+          <CodeMirrorReadOnly value={this.props.bot.response} heightAuto={true} mode={this.props.languageEn} />
         </div>
       </div>
     );
@@ -32,5 +32,6 @@ class Bot extends React.Component {
 }
 
 Bot.propTypes = {
-  bot: PropTypes.object
+  bot: PropTypes.object,
+  languageEn: PropTypes.string
 };

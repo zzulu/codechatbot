@@ -16,8 +16,11 @@ class User < ApplicationRecord
   end
 
   def set_connection_code
-    self.update_columns(connection_code: SecureRandom.uuid.split('-')[1..3].sample.to_s)
-    # 중복된 값이 set 되는 경우, 오류 발생함. 예외 처리 필요.
+    begin
+      self.update_columns(connection_code: SecureRandom.uuid.split('-')[1..3].sample.to_s)
+    rescue ActiveRecord::RecordNotUnique
+      retry
+    end
   end
 
   def clear_connection_code

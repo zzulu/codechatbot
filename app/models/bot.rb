@@ -19,26 +19,33 @@ class Bot < ApplicationRecord
     self.user_id.nil?
   end
 
-  def self.run_code(prepend, code)
-    code = "require 'timeout'\r\nTimeout::timeout(3) do\r\n#{prepend}\r\n\r\n#{code}\r\nend"
-    tmp_path = '/home/ubuntu/rubychatbot/tmp/'
-    file = Tempfile.new(['','.rb'], tmp_path)
+  def fork(user) # Clone bot
+    Bot.create(user_id: user.id, parent_id: self.id, message: self.message, prepend: self.prepend, response: self.response)
+  end
+
+  def run_code # Only called via Kakaotalk, so bot.user always exists.
+    Bot.run_code(self.user.id, self.prepend, self.response)
+  end
+
+  require 'timeout'
+  def self.run_code(user_id, prepend, code)
+    code = "#{prepend}\r\n\r\n#{code}"
+    tmp_path = "/home/ubuntu/codechatbot/tmp/#{user_id}/"
+    file = Tempfile.new(['',".#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' }}"], tmp_path)
+    container_name = File.basename(file,".#{ENV.fetch('CHATBOT_LANGUAGE_EXTENSION') { 'rb' }}")
     begin
       file.write(code)
+      file.rewind
+      result = Timeout.timeout(3) do
+        `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
+      end
+    rescue Timeout::Error
+      system("sudo docker stop #{container_name}")
+      result = '[최대 실행 시간 3초를 초과하였습니다. 실행을 중단합니다.]'
     ensure
       file.close
-      result = `sudo docker run -t --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app ruby-custom-gem ruby #{file.path.gsub(tmp_path,'')} 2>&1`
       file.unlink
     end
     return result #.force_encoding('ISO-8859-1').encode('UTF-8') # Encoding Issue
   end
-
-  def run_code
-    Bot.run_code(self.prepend, self.response)
-  end
-
-  def fork(user)
-    # Clone bot
-    Bot.create(user_id: user.id, parent_id: self.id, message: self.message, prepend: self.prepend, response: self.response)
-  end
- end
+end

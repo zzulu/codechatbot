@@ -11,7 +11,7 @@ class Bots extends React.Component {
           </div>
         </div>
         { this.props.bots.map((bot)=>(
-          <Bot key={bot.id} bot={bot} editing={this.props.editing} deleteBot={this.props.deleteBot} />
+          <Bot key={bot.id} bot={bot} editing={this.props.editing} deleteBot={this.props.deleteBot} languageEn={this.props.languageEn} />
         ))}
       </React.Fragment>
     );
@@ -20,5 +20,6 @@ class Bots extends React.Component {
 
 Bots.propTypes = {
   bots: PropTypes.array,
-  editing: PropTypes.bool
+  editing: PropTypes.bool,
+  languageEn: PropTypes.string
 }
