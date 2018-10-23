@@ -24,7 +24,7 @@ class Bot < ApplicationRecord
   end
 
   def run_code
-    Bot.run_code(self.user.&id || 0, self.prepend, self.response)
+    Bot.run_code(self.user_id || 0, self.prepend, self.response)
   end
 
   require 'timeout'
