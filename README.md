@@ -1,11 +1,12 @@
 # Code Chatbot
 
-### hotfix 0.2.1-0.2.4
+### hotfix 0.2.1-0.2.5
 - Change application name
 - Add language_en props to codemirror form(mode)
 - Fix bug (Can't create tmp code file because the dir doesn't exist)
 - Fix bug (require codemirror/modes)
 - Change site url in message
+- Add 'figaro'
 
 ### release 0.2.0
 - Renew to 'Code Chatbot'
