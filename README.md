@@ -1,5 +1,8 @@
 # Code Chatbot
 
+### hotfix 0.2.1
+- Change application name
+
 ### release 0.2.0
 - Renew to 'Code Chatbot'
 - Add `CHATBOT_LANGUAGE_EN`, `CHATBOT_LANGUAGE_KO`, `CHATBOT_LANGUAGE_EXTENSION`, `CHATBOT_DOCKER_RUN_COMMAND` for supporting various languages (docker setting required)
