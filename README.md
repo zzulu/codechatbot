@@ -1,4 +1,8 @@
-# Ruby Chatbot
+# Code Chatbot
+
+### release 0.2.0
+- Renew to 'Code Chatbot'
+- Add `CHATBOT_LANGUAGE_EN`, `CHATBOT_LANGUAGE_KO`, `CHATBOT_LANGUAGE_EXTENSION`, `CHATBOT_DOCKER_RUN_COMMAND` for supporting various languages (docker setting required)
 
 ### hotfix 0.1.15-0.1.16
 - Fix some wrong codes

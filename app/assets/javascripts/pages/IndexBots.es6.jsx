@@ -34,13 +34,14 @@ class IndexBots extends React.Component {
           <a href="/bots/new" className="btn btn-primary">봇 만들기</a>
           <button className={`btn ${this.editClassName(this.state.editing)}`} onClick={()=>this.handleClick(this.state.editing)}>{this.editContent(this.state.editing)}</button>
         </div>
-        <Bots bots={this.state.bots} editing={this.state.editing} deleteBot={this.deleteBot} />
+        <Bots bots={this.state.bots} editing={this.state.editing} deleteBot={this.deleteBot} languageEn={this.props.languageEn} />
     </div>
     );
   }
 }
 
 IndexBots.propTypes = {
-  bots: PropTypes.array
+  bots: PropTypes.array,
+  languageEn: PropTypes.string
 };
 

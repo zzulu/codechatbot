@@ -1,3 +1,4 @@
 <%= react_component('IndexBots', {
-      bots: @bots.as_json
+      bots: @bots.as_json,
+      language_en: ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' },
     }) %>

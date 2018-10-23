@@ -1,4 +1,5 @@
 <%= react_component('ShowBot', {
       bot: @bot.as_json,
-      role: current_user.role
+      role: current_user.role,
+      language_en: ENV.fetch("CHATBOT_LANGUAGE_EN"){ 'ruby' },
     })%>
