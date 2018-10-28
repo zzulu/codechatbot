@@ -38,7 +38,7 @@ class Bot < ApplicationRecord
       file.write(code)
       file.rewind
       result = Timeout.timeout(3) do
-        `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom timeout 4s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
+        `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom timeout --signal=SIGINT 4s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
       end
     rescue Timeout::Error
       system("sudo docker stop #{container_name}")
