@@ -1,6 +1,6 @@
 # Code Chatbot
 
-### hotfix 0.2.1-0.2.9
+### hotfix 0.2.1-0.2.10
 - Change application name
 - Add language_en props to codemirror form(mode)
 - Fix bug (Can't create tmp code file because the dir doesn't exist)
@@ -9,6 +9,7 @@
 - Add 'figaro'
 - Add JS and python favicons & og-image
 - Fix bug (Bot can have no user_id)
+- Add Linux timeout command into container
 
 ### release 0.2.0
 - Renew to 'Code Chatbot'
