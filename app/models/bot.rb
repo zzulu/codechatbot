@@ -37,12 +37,12 @@ class Bot < ApplicationRecord
     begin
       file.write(code)
       file.rewind
-      result = Timeout.timeout(3) do
-        `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom timeout --signal=SIGINT 4s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
+      result = Timeout.timeout(5) do
+        `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom timeout --signal=SIGINT 6s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
       end
     rescue Timeout::Error
       system("sudo docker stop #{container_name}")
-      result = '[최대 실행 시간 3초를 초과하였습니다. 실행을 중단합니다.]'
+      result = '[최대 실행 시간 5초를 초과하였습니다. 실행을 중단합니다.]'
     ensure
       file.close
       file.unlink
