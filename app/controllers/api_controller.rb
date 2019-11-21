@@ -85,6 +85,10 @@ class ApiController < ApplicationController
     def validate_message_type
       if params[:message].has_key?(:text)
         @content = params[:message][:text]
+        if @content == '/start'
+          User.send_message(params[:message][:from][:id], '반갑습니다 :) 파이썬 챗봇입니다. https://py.hphk.io')
+          render json: {}, status: :ok
+        end
       else
         #TODO: API sendMessage
         User.send_message(params[:message][:from][:id], '텍스트만 입력 가능합니다.')
