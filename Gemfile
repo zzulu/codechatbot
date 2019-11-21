@@ -18,11 +18,12 @@ gem 'font-awesome-sass', '~> 5.0.13'
 gem 'cancancan', '~> 2.0'
 
 gem 'pusher'
+gem 'httparty', '~> 0.17.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5.1'
+# gem 'mysql2', '~> 0.5.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -64,6 +65,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Sqlite3
+  gem 'sqlite3', '~> 1.3.6'
 end
 
 group :test do
@@ -72,6 +75,11 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+end
+
+group :production do
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '~> 0.5.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

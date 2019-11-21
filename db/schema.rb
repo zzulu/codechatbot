@@ -12,9 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_06_01_020537) do
 
-  create_table "bots", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "parent_id"
+  create_table "bots", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "parent_id"
     t.string "message", null: false
     t.text "response"
     t.text "prepend"
@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 2018_06_01_020537) do
     t.index ["user_id"], name: "index_bots_on_user_id"
   end
 
-  create_table "gemfiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "gemfiles", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "sign_in_count", default: 0, null: false

@@ -16,11 +16,11 @@ Rails.application.routes.draw do
 
   get 'account_connection', to: 'bots#account_connection', as: :account_connection
 
-  get 'keyboard', to: 'api#keyboard'
-  post 'message', to: 'api#message'
-  post 'friend', to: 'api#create_friend'
-  delete 'friend/:user_key', to: 'api#destroy_friend'
-  delete 'chat_room/:user_key', to: 'api#chat_room'
+  # get 'keyboard', to: 'api#keyboard'
+  post "#{Rails.application.credentials.dig(:telegram_bot_token)}", to: 'api#message'
+  # post 'friend', to: 'api#create_friend'
+  # delete 'friend/:user_key', to: 'api#destroy_friend'
+  # delete 'chat_room/:user_key', to: 'api#chat_room'
 
   resources :bots do
     collection do

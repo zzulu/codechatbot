@@ -41,6 +41,10 @@ class User < ApplicationRecord
     end
   end
 
+  def send_message(text)
+    User.send_message(self.user_key, text)
+  end
+
   def self.create_connection(user_key, connection_code)
     if user = find_by(connection_code: connection_code)
       user.update_attributes(user_key: user_key, friend: true, in_chat_room: true)
@@ -49,6 +53,14 @@ class User < ApplicationRecord
     else
       nil
     end
+  end
+
+  def self.send_message(chat_id, text)
+    response = HTTParty.post("https://api.telegram.org/bot#{Rails.application.credentials.dig(:telegram_bot_token)}/sendMessage",
+                                body: {
+                                  chat_id: chat_id,
+                                  text: text,
+                                })
   end
 
   def admin?
