@@ -6,13 +6,13 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇<%= yield(:title) %></title>
 
-    <meta name="description" content="Make your chatbot which can run code">
+    <meta name="description" content="나만의 <%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇을 만들어 보세요!">
     <meta name="application-name" content="HPHK">
     <meta name="author" content="HPHK">
     <meta property="og:title" content="<%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://<%= ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' } %>.hphk.io">
-    <meta property="og:description" content="Make your chatbot which can run code">
+    <meta property="og:description" content="나만의 <%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇을 만들어 보세요!">
     <meta property="og:image" content="<%= image_url("og-images/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}/og-image.png") %>">
 
     <%= csrf_meta_tags %>
