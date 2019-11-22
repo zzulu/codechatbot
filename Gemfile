@@ -21,7 +21,7 @@ gem 'pusher'
 gem 'httparty', '~> 0.17.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2.2.1'
 # Use mysql as the database for Active Record
 # gem 'mysql2', '~> 0.5.1'
 # Use Puma as the app server
