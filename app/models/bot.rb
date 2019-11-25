@@ -27,26 +27,53 @@ class Bot < ApplicationRecord
     Bot.run_code(self.user_id || 0, self.prepend, self.response)
   end
 
-  require 'timeout'
+  # require 'timeout'
   def self.run_code(user_id, prepend, code)
     code = "#{prepend}\r\n\r\n#{code}"
-    tmp_path = Rails.root.join('tmp','codes',"#{user_id}")
-    Dir.mkdir(tmp_path) unless File.exist?(tmp_path)
-    file = Tempfile.new(['',".#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' }}"], tmp_path)
-    container_name = File.basename(file,".#{ENV.fetch('CHATBOT_LANGUAGE_EXTENSION') { 'rb' }}")
-    begin
-      file.write(code)
-      file.rewind
-      result = Timeout.timeout(5) do
-        `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom timeout --signal=SIGINT 6s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
-      end
-    rescue Timeout::Error
-      system("sudo docker stop #{container_name}")
-      result = '[최대 실행 시간 5초를 초과하였습니다. 실행을 중단합니다.]'
-    ensure
-      file.close
-      file.unlink
+
+    # Docker
+    # tmp_path = Rails.root.join('tmp','codes',"#{user_id}")
+    # Dir.mkdir(tmp_path) unless File.exist?(tmp_path)
+    # file = Tempfile.new(['',".#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' }}"], tmp_path)
+    # container_name = File.basename(file,".#{ENV.fetch('CHATBOT_LANGUAGE_EXTENSION') { 'rb' }}")
+    # begin
+    #   file.write(code)
+    #   file.rewind
+    #   result = Timeout.timeout(5) do
+    #     `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom timeout --signal=SIGINT 6s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
+    #   end
+    # rescue Timeout::Error
+    #   system("sudo docker stop #{container_name}")
+    #   result = '[최대 실행 시간 5초를 초과하였습니다. 실행을 중단합니다.]'
+    # ensure
+    #   file.close
+    #   file.unlink
+    # end
+
+    # AWS Lambda Initial
+    lambda_client = Aws::Lambda::Client.new(
+      region: 'ap-northeast-2',
+      access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
+      secret_access_key: Rails.application.credentials.dig(:aws, :secret_access_key)
+    )
+
+    # Invoke Lambda Function
+    request_payload = {code: code}
+    payload = JSON.generate(request_payload)
+    response = lambda_client.invoke({
+                 function_name: "run_code_#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}",
+                 invocation_type: 'RequestResponse',
+                 log_type: 'None',
+                 payload: payload
+               })
+    response_payload = JSON.parse(response.payload.string) # , symbolize_names: true)
+
+    if response_payload['statusCode'] == 200
+      result = response_payload['body']
+    else
+      result = "[#{response_payload['errorType']||'-'}] #{response_payload['errorMessage']}"
     end
+
     return result #.force_encoding('ISO-8859-1').encode('UTF-8') # Encoding Issue
   end
 end

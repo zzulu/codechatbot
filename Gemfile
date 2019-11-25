@@ -20,6 +20,10 @@ gem 'cancancan', '~> 2.0'
 gem 'pusher'
 gem 'httparty', '~> 0.17.1'
 
+# AWS SDK
+gem 'aws-sdk-s3', '~> 1.32' 
+gem 'aws-sdk-lambda', '~> 1.32'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2.1'
 # Use mysql as the database for Active Record
