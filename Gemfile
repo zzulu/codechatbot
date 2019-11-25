@@ -8,7 +8,7 @@ gem 'figaro'
 gem 'devise'
 gem 'react-rails'
 
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 
 gem 'codemirror-rails'
