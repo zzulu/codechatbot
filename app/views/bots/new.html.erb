@@ -3,5 +3,5 @@
       bot: @bot.as_json,
       errors: @bot.errors.as_json, 
       role: current_user.role,
-      language_en: ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' },
+      language_en: ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' },
     }) %>

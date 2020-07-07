@@ -69,8 +69,8 @@ class ApiController < ApplicationController
           # render json: {'message': {'text': '인증 코드가 만료 되었거나, 잘못된 인증 코드를 입력하셨습니다.'}}
           render json: {}, status: :ok
         else
-          User.send_message(params[:message][:from][:id], "계정 연동이 되어있지 않습니다. https://#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' }}.hphk.io/users/sign_up 에서 계정 생성 후, 계정 연동을 진행해 주시기 바랍니다.")
-          # render json: {'message': {'text': "계정 연동이 되어있지 않습니다. https://#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' }}.hphk.io 에서 계정 생성 후, 계정 연동을 진행해 주시기 바랍니다."}}
+          User.send_message(params[:message][:from][:id], "계정 연동이 되어있지 않습니다. https://#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'py' }}.hphk.io/users/sign_up 에서 계정 생성 후, 계정 연동을 진행해 주시기 바랍니다.")
+          # render json: {'message': {'text': "계정 연동이 되어있지 않습니다. https://#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'py' }}.hphk.io 에서 계정 생성 후, 계정 연동을 진행해 주시기 바랍니다."}}
           render json: {}, status: :ok
         end
       elsif @user.connection_code.present?

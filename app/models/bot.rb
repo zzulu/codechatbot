@@ -34,13 +34,13 @@ class Bot < ApplicationRecord
     # Docker
     # tmp_path = Rails.root.join('tmp','codes',"#{user_id}")
     # Dir.mkdir(tmp_path) unless File.exist?(tmp_path)
-    # file = Tempfile.new(['',".#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' }}"], tmp_path)
-    # container_name = File.basename(file,".#{ENV.fetch('CHATBOT_LANGUAGE_EXTENSION') { 'rb' }}")
+    # file = Tempfile.new(['',".#{ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'py' }}"], tmp_path)
+    # container_name = File.basename(file,".#{ENV.fetch('CHATBOT_LANGUAGE_EXTENSION') { 'py' }}")
     # begin
     #   file.write(code)
     #   file.rewind
     #   result = Timeout.timeout(5) do
-    #     `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}-custom timeout --signal=SIGINT 6s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'ruby' }} #{File.basename(file)} 2>&1`
+    #     `sudo docker run -t --name=#{container_name} --rm -v #{tmp_path}:/usr/src/app:ro -w /usr/src/app #{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}-custom timeout --signal=SIGINT 6s #{ENV.fetch("CHATBOT_DOCKER_RUN_COMMAND") { 'python' }} #{File.basename(file)} 2>&1`
     #   end
     # rescue Timeout::Error
     #   system("sudo docker stop #{container_name}")
@@ -61,7 +61,7 @@ class Bot < ApplicationRecord
     request_payload = {code: code}
     payload = JSON.generate(request_payload)
     response = lambda_client.invoke({
-                 function_name: "run_code_#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}",
+                 function_name: "run_code_#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}",
                  invocation_type: 'RequestResponse',
                  log_type: 'None',
                  payload: payload
