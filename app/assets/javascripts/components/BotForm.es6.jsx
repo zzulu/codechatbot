@@ -109,7 +109,10 @@ class BotForm extends React.Component {
         {this.renderTemplateCheckbox(this.state.template, this.props.role)}
 
         <div className="d-flex justify-content-between pb-3">
-          <button type="submit" className="btn btn-primary">저장</button>
+          <div className="bot--button">
+            <button type="submit" className="btn btn-primary">저장</button>
+            <a href="/bots" className="btn btn-outline-secondary">취소</a>
+          </div>
           <button type="button" className="btn btn-success" onClick={()=>this.props.runCode(this.state.prepend, this.state.response)} disabled={this.props.loading}>실행</button>
         </div>
       </form>
