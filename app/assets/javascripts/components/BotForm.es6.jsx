@@ -10,7 +10,8 @@ class BotForm extends React.Component {
       template: this.props.bot.userId ? false : true,
       errorsClass: {
         message: this.props.errors.message ? 'is-invalid':''
-      }
+      },
+      cancelUrl: this.props.bot.id ? `/bots/${this.props.bot.id}`:'/bots',
     }
   }
 
@@ -111,7 +112,7 @@ class BotForm extends React.Component {
         <div className="d-flex justify-content-between pb-3">
           <div className="bot--button">
             <button type="submit" className="btn btn-primary">저장</button>
-            <a href="/bots" className="btn btn-outline-secondary">취소</a>
+            <a href={this.state.cancelUrl} className="btn btn-outline-secondary">취소</a>
           </div>
           <button type="button" className="btn btn-success" onClick={()=>this.props.runCode(this.state.prepend, this.state.response)} disabled={this.props.loading}>실행</button>
         </div>
