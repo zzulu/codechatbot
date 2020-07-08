@@ -22,11 +22,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'https://js.pusher.com/4.1/pusher.min.js', 'data-turbolinks-track': 'reload' %>
 
-    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon-152.png") %>">
-    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon-120.png") %>">
     <!-- favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon-180.png") %>">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon-152.png") %>">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon-120.png") %>">
+
     <link rel="shortcut icon" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon.ico") %>" />
   </head>
 
