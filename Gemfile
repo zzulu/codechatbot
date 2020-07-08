@@ -6,7 +6,7 @@ ruby '2.4.1'
 gem 'figaro'
 
 gem 'devise'
-gem 'react-rails'
+# gem 'react-rails'
 
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'

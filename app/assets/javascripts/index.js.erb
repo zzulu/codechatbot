@@ -1,0 +1,201 @@
+// CodeMirror configure
+const betterTab = function (cm) {
+  if (cm.somethingSelected()) {
+    cm.indentSelection('add')
+  } else {
+    cm.replaceSelection(cm.getOption('indentWithTabs')? '\t':
+      Array(cm.getOption('indentUnit') + 1).join(' '), 'end', '+input')
+  }
+}
+
+const initCodeMirror = function (mode, codeEditor) {
+  const options = {
+    lineNumbers: true,
+    mode: mode,
+    theme: 'monokai',
+    extraKeys: { Tab: betterTab },
+  }
+
+  const editor = CodeMirror.fromTextArea(codeEditor, options)
+
+  editor.on('change', (cm) => {
+    codeEditor.value = cm.getValue()
+  })
+
+  return editor
+}
+
+// Spinner
+const spinner = {
+  frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'],
+  index: 0,
+  interval: null,
+}
+
+const spin = function (result) {
+  if (spinner.index + 1 >= spinner.frames.length) {
+    spinner.index = 0
+  } else {
+    spinner.index += 1
+  }
+  result.innerText = spinner.frames[spinner.index]
+}
+
+// Run Code
+const runCode = function (button, response, result, prepend) {
+  const data = {
+    prepend: prepend ? prepend.value : '',
+    code: response.value,
+  }
+  button.setAttribute('disabled', true)
+  spinner.interval = setInterval(spin, 80, result)
+
+  $.ajax({
+    url: `/bots/run_code`, type: 'POST', dataType: 'json',
+    data: data,
+  }).done((res) => {
+    result.innerText = res.result
+  }).fail((err) => {
+    result.innerText = `${err.statusText} (${err.status})`
+  }).always(() => {
+    clearInterval(spinner.interval)
+    button.removeAttribute('disabled')
+  })
+}
+
+const runBot = function (button, botId, result) {
+  button.setAttribute('disabled', true)
+  spinner.interval = setInterval(spin, 80, result)
+
+  $.ajax({
+    url: `/bots/${botId}/run`, type: 'POST', dataType: 'json',
+  }).done((res) => {
+    result.innerText = res.result
+  }).fail((err) => {
+    result.innerText = `${err.statusText} (${err.status})`
+  }).always(() => {
+    clearInterval(spinner.interval)
+    button.removeAttribute('disabled')
+  })
+}
+
+
+// Pusher
+const initPusher = function (button) {
+  const connectionCode = button.dataset.code
+
+  const pusher = new Pusher('<%= Rails.application.credentials.dig(:pusher, :key).to_s %>', { cluster: 'ap1', encrypted: true })
+
+  channel = pusher.subscribe(`account-connection-${connectionCode}`);
+  console.log('connected!')
+
+  channel.bind('connected', (data) => {
+    if (connectionCode == data.code) {
+      button.classList.remove('btn-outline-success', 'disabled', 'connection--pending')
+      button.classList.add('btn-success', 'connection--success')
+      button.href = '/bots'
+      button.firstElementChild.innerText = '인증 완료'
+      pusher.unsubscribe(`account-connection-${connectionCode}`);
+      console.log('disconnect!')
+    }
+  });
+
+  channel.bind('authenticated', (data) => {
+    if (data.token) {
+      button.classList.remove('btn-outline-success', 'disabled', 'connection--pending')
+      button.classList.add('btn-success', 'connection--success')
+      button.href = `/users/password/edit?reset_password_token=${data.token}`
+      button.firstElementChild.innerText = '인증 완료'
+      pusher.unsubscribe(`account-connection-${connectionCode}`);
+      console.log('disconnect!')
+    }
+  });
+
+  return pusher
+}
+
+
+
+let cm, prependCm;
+let pusher;
+
+document.addEventListener('turbolinks:load', function () {
+  // bot index
+  const responses = document.querySelectorAll('.bot--response:not([data-turbolinks=cached])');
+  responses.forEach(function (textarea) {
+    CodeMirror.fromTextArea(textarea, {
+      lineNumbers: true,
+      mode: '<%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' } %>',
+      theme: 'monokai',
+      readOnly: true,
+    })
+    textarea.dataset.turbolinks = 'cached'
+  })
+
+  // bot new, edit
+  const prepend = document.getElementById('bot_prepend')
+  const response = document.getElementById('bot_response')
+  const runCodeButton = document.getElementById('run_code')
+  const result = document.getElementById('result')
+
+  if (response) {
+    if (response.dataset.turbolinks != 'cached') {
+      cm = initCodeMirror('<%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' } %>', response)
+      response.dataset.turbolinks = 'cached'
+    }
+
+    if (prepend) {
+      if (prepend.dataset.turbolinks != 'cached') {
+        prependCm = initCodeMirror('<%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' } %>', prepend)
+        prepend.dataset.turbolinks = 'cached'
+      }
+    }
+    
+    runCodeButton.addEventListener('click', function (e) {
+      runCode(e.target, response, result, prepend)
+    })
+  }
+
+  // bot show
+  const runBotButton = document.getElementById('run_bot')
+
+  if (runBotButton) {
+    runBotButton.addEventListener('click', function (e) {
+      runBot(e.target, e.target.dataset.id, result)
+    }) 
+  }
+
+  // pusher
+  const connectionButton = document.getElementById('connection--button')
+
+  if (connectionButton) {
+    pusher = initPusher(connectionButton)    
+  }
+})
+
+document.addEventListener('turbolinks:before-cache', function () {
+  // bot new, edit
+  const message = document.getElementById('bot_message')
+  const result = document.getElementById('result')
+
+  if (message) {
+    message.value = ''
+    cm.setValue('')
+    if (prependCm) {
+      prependCm.setValue('')      
+    }
+  }
+
+  if (result) {
+    result.innerText = ''
+  }
+
+  // pusher
+  const connectionButton = document.getElementById('connection--button')
+
+  if (connectionButton) {
+    console.log('disconnect!')
+    pusher.disconnect()
+  }
+})
+

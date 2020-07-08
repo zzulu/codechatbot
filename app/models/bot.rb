@@ -7,11 +7,11 @@ class Bot < ApplicationRecord
 
   scope :templates, -> { where(user_id: nil) }
 
-  before_create :make_template, if: Proc.new {|bot| bot.template && bot.user.admin? }
+  before_save :create_template, if: Proc.new {|bot| bot.user.admin? && !bot.template.to_i.zero? }
 
   validates :message, presence: {message: '입력 메시지를 입력하세요.'}, uniqueness: { scope: :user_id, message: '존재하는 입력 메세지입니다. 다른 메시지를 입력해 주세요.'}
 
-  def make_template
+  def create_template
     self.user_id = nil
   end
 

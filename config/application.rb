@@ -22,6 +22,6 @@ module Codechatbot
     config.active_record.default_timezone = :local
 
     # Camelize Props
-    config.react.camelize_props = true
+    # config.react.camelize_props = true
   end
 end

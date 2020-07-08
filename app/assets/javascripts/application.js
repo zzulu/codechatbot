@@ -16,9 +16,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require react
-//= require react_ujs
-//= require components
 //= require codemirror
 //= require codemirror_modes
-//= require custom
+//= require index

@@ -31,15 +31,25 @@
   </head>
 
   <body>
-    <%= react_component("Navbar", {
-      root_path: bots_path,
-      edit_user_registration_path: edit_user_registration_path,
-      destroy_user_session_path: destroy_user_session_path,
-      controller: params[:controller],
-      username: current_user.username,
-      language_ko: ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' },
-    }, {prerender: true}) if user_signed_in? %>
-    
+    <% if user_signed_in? %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <%= link_to "#{ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' }} 챗봇", root_path, class: 'navbar-brand' %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item <%= params[:controller] == 'users/registrations' ? 'active' : '' %>">
+            <%= link_to current_user.username, edit_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '로그아웃', destroy_user_session_path, class: 'nav-link', method: 'delete' %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
