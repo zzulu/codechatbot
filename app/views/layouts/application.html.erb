@@ -4,16 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇<%= yield(:title) %></title>
+    <title><%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇<%= yield(:title) %></title>
 
-    <meta name="description" content="나만의 <%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇을 만들어 보세요!">
+    <meta name="description" content="나만의 <%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇을 만들어 보세요!">
     <meta name="application-name" content="HPHK">
     <meta name="author" content="HPHK">
-    <meta property="og:title" content="<%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇">
+    <meta property="og:title" content="<%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://<%= ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'rb' } %>.hphk.io">
-    <meta property="og:description" content="나만의 <%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' } %> 챗봇을 만들어 보세요!">
-    <meta property="og:image" content="<%= image_url("og-images/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}/og-image.png") %>">
+    <meta property="og:url" content="https://<%= ENV.fetch("CHATBOT_LANGUAGE_EXTENSION") { 'py' } %>.hphk.io">
+    <meta property="og:description" content="나만의 <%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇을 만들어 보세요!">
+    <meta property="og:image" content="<%= image_url("og-images/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/og-image.png") %>">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -23,23 +23,33 @@
     <%= javascript_include_tag 'https://js.pusher.com/4.1/pusher.min.js', 'data-turbolinks-track': 'reload' %>
 
     <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}/favicon-152.png") %>">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon-152.png") %>">
     <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}/favicon-120.png") %>">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon-120.png") %>">
     <!-- favicons -->
-    <link rel="shortcut icon" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' }}/favicon.ico") %>" />
+    <link rel="shortcut icon" href="<%= image_url("favicons/#{ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' }}/favicon.ico") %>" />
   </head>
 
   <body>
-    <%= react_component("Navbar", {
-      root_path: bots_path,
-      edit_user_registration_path: edit_user_registration_path,
-      destroy_user_session_path: destroy_user_session_path,
-      controller: params[:controller],
-      username: current_user.username,
-      language_ko: ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' },
-    }, {prerender: true}) if user_signed_in? %>
-    
+    <% if user_signed_in? %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <%= link_to "#{ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' }} 챗봇", root_path, class: 'navbar-brand' %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item <%= params[:controller] == 'users/registrations' ? 'active' : '' %>">
+            <%= link_to current_user.username, edit_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '로그아웃', destroy_user_session_path, class: 'nav-link', method: 'delete' %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

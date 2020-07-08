@@ -1,4 +1,28 @@
-<%= react_component('IndexBots', {
-      bots: @bots.as_json,
-      language_en: ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' },
-    }) %>
+<div class="container bots">
+  <div class="bots--button d-flex justify-content-end">
+    <%= link_to '봇 만들기', new_bot_path, class: 'btn btn-primary' %>
+  </div>
+  <div class="row bots--head">
+    <div class="col-12 col-sm-3">
+      입력 메시지
+    </div>
+    <div class="col-12 col-sm-9">
+      답변 코드
+    </div>
+  </div>
+  <% @bots.each do |bot| %>
+  <div class="row bots--item">
+    <div class="col-12 col-sm-3 mb-2 mb-sm-0">
+      <% if not bot.user_id %>
+      <span class="tag--tamplate mr-2">템플릿</span>
+      <% end %>
+      <%= link_to bot.message, bot_path(bot) %>
+    </div>
+    <div class="col-12 col-sm-9">
+      <div class="readonly-editor height-auto">
+        <textarea class="bot--response" rows="10" readonly="true"><%= bot.response %></textarea>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

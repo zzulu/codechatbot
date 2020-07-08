@@ -11,7 +11,7 @@ default: &default
 
 development:
   <<: *default
-  # database: <%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' } %>chatbot_development
+  # database: <%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' } %>chatbot_development
   database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -19,7 +19,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  # database: <%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' } %>chatbot_test
+  # database: <%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' } %>chatbot_test
   database: db/test.sqlite3
 
 production:
@@ -28,5 +28,5 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   username: root
-  database: <%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' } %>chatbot_production
+  database: <%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' } %>chatbot_production
   password: <%= Rails.application.credentials.dig(:database_password) %>

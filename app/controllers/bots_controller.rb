@@ -2,7 +2,7 @@ class BotsController < ApplicationController
   before_action :authenticate_user!
   before_action :connect_user!, except:[:account_connection]
   before_action :connected_user!, only:[:account_connection]
-  before_action :set_bot, only: [:show, :edit, :update, :destroy]
+  before_action :set_bot, only: [:show, :edit, :update, :destroy, :run]
   skip_before_action :verify_authenticity_token, if: Proc.new {|c| c.request.format.json? }
 
   authorize_resource
@@ -47,8 +47,9 @@ class BotsController < ApplicationController
   # PATCH/PUT /bots/1.json
   def update
     @bot = @bot.fork(current_user) if @bot.template? && !current_user.admin?
+
     respond_to do |format|
-      if @bot.update_attributes(bot_params)
+      if @bot.update_attributes(bot_params.merge(user: current_user))
         format.html { redirect_to @bot, notice: 'Bot was successfully updated.' }
         format.json { render :show, status: :ok, location: @bot }
       else
@@ -71,6 +72,12 @@ class BotsController < ApplicationController
   # POST /bots/run_code
   def run_code
     result = Bot.run_code(current_user.id, params[:prepend], params[:code])
+    render json: {result: result}
+  end
+
+  # POST /bots/1/run
+  def run
+    result = @bot.run_code
     render json: {result: result}
   end
 

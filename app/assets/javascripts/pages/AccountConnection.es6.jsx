@@ -25,7 +25,7 @@ class AccountConnection extends React.Component {
     });
 
     channel.bind('authenticated', (data) => {
-      if(data.token) {
+      if (data.token) {
         this.setState({
           pendingClass: 'btn-success connection--success',
           pendingContent: '인증 완료',

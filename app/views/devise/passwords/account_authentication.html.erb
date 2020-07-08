@@ -1,12 +1,23 @@
-<%= react_component('CleanNavbar', {
-      root_path: root_path,
-      language_ko: ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' },
-    }) %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <%= link_to "#{ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' }} 챗봇", root_path, class: 'navbar-brand' %>
+</nav>
 
-<%= react_component('AccountConnection',{
-      connection_code: params[:code],
-      pusher_key: Rails.application.credentials.dig(:pusher, :key).to_s,
-      header: '계정 인증 코드',
-      text: "비밀번호 재설정을 위하여, '#{ENV.fetch("CHATBOT_LANGUAGE_KO") { '루비' }} 챗봇' 텔레그램 봇에게 아래의 코드를 전송하세요.",
-      redirect_path: edit_user_password_path
-    }) %>
+<div class="container">
+  <div class="connection">
+    <h3>계정 인증 코드</h3>
+    <p class="connection--text">
+      비밀번호 재설정을 위하여, '<%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇' 텔레그램 봇에게 아래의 코드를 전송하세요.
+    </p>
+    <div class="connection--code-wrapper">
+      <% params[:code].split('').each do |c| %>
+        <span class="connection--code-char"><%= c %></span>
+      <% end %>
+    </div>
+    <div class="connection--button">
+      <a href="" id="connection--button" class="btn btn-outline-success disabled connection--pending" data-code="<%= params[:code] %>">
+        <span>인증 대기</span>
+        <div class="border--spinner"></div>
+      </a>
+    </div>
+  </div>
+</div>

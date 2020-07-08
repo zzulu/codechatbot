@@ -26,6 +26,9 @@ Rails.application.routes.draw do
     collection do
       post 'run_code', to: 'bots#run_code'
     end
+    member do
+      post 'run', to: 'bots#run'
+    end
   end
 
   # Write routes here about gemfiles

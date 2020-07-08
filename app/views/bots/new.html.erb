@@ -1,7 +1,45 @@
-<%= react_component('NewBot', {
-      form_authenticity_token: form_authenticity_token,
-      bot: @bot.as_json,
-      errors: @bot.errors.as_json, 
-      role: current_user.role,
-      language_en: ENV.fetch("CHATBOT_LANGUAGE_EN") { 'ruby' },
-    }) %>
+<div class="container">
+  <div class="row bot">
+    <div class="col-12 col-lg-6">
+      <%= form_for @bot do |f| %>
+        <div class="form-group">
+          <%= f.label :message, '입력 메시지', class: 'required' %>
+          <%= f.text_field :message, class: "form-control #{form_invalid(@bot, :message)}", autocomplete: 'off' %>
+        </div>
+
+        <% if current_user.role == 'admin' %>
+        <div class="form-group height-half">
+          <%= f.label :prepend, '앞에 붙는 코드' %>
+          <%= f.text_area :prepend, class: 'form-control', rows: 10 %>
+        </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= f.label :response, '답변 코드', class: 'required' %>
+          <%= f.text_area :response, class: 'form-control', rows: 10 %>
+        </div>
+
+        <% if current_user.role == 'admin' %>
+        <div class="custom-control custom-checkbox mb-3">
+          <%= f.check_box :template, class: 'custom-control-input' %>
+          <%= f.label :template, '이 챗봇은 템플릿 입니다.', class: 'custom-control-label' %>
+        </div>
+        <% end %>
+
+        <div class="d-flex justify-content-between pb-3">
+          <div class="bot--button">
+            <%= f.submit '저장', class: "btn btn-primary" %>
+            <%= link_to '취소', bots_path, class: 'btn btn-outline-secondary' %>
+          </div>
+          <button id="run_code" type="button" class="btn btn-success">실행</button>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-6">
+      <label>실행 결과</label>
+      <div class="bot--result">
+        <pre id="result"></pre>
+      </div>
+    </div>
+  </div>
+</div>
