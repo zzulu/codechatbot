@@ -87,7 +87,6 @@ const initPusher = function (button) {
   const pusher = new Pusher('<%= Rails.application.credentials.dig(:pusher, :key).to_s %>', { cluster: 'ap1', encrypted: true })
 
   channel = pusher.subscribe(`account-connection-${connectionCode}`);
-  console.log('connected!')
 
   channel.bind('connected', (data) => {
     if (connectionCode == data.code) {
@@ -96,7 +95,6 @@ const initPusher = function (button) {
       button.href = '/bots'
       button.firstElementChild.innerText = '인증 완료'
       pusher.unsubscribe(`account-connection-${connectionCode}`);
-      console.log('disconnect!')
     }
   });
 
@@ -107,7 +105,6 @@ const initPusher = function (button) {
       button.href = `/users/password/edit?reset_password_token=${data.token}`
       button.firstElementChild.innerText = '인증 완료'
       pusher.unsubscribe(`account-connection-${connectionCode}`);
-      console.log('disconnect!')
     }
   });
 
@@ -194,7 +191,6 @@ document.addEventListener('turbolinks:before-cache', function () {
   const connectionButton = document.getElementById('connection--button')
 
   if (connectionButton) {
-    console.log('disconnect!')
     pusher.disconnect()
   }
 })
