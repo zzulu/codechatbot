@@ -71,7 +71,7 @@ class BotsController < ApplicationController
 
   # POST /bots/run_code
   def run_code
-    result = Bot.run_code(current_user.id, params[:prepend], params[:code])
+    result = Bot.run_code(params[:prepend], params[:code])
     render json: {result: result}
   end
 

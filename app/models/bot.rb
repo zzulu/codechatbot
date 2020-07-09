@@ -24,11 +24,11 @@ class Bot < ApplicationRecord
   end
 
   def run_code
-    Bot.run_code(self.user_id || 0, self.prepend, self.response)
+    Bot.run_code(self.prepend, self.response)
   end
 
   # require 'timeout'
-  def self.run_code(user_id, prepend, code)
+  def self.run_code(prepend, code)
     code = "#{prepend}\r\n\r\n#{code}"
 
     # Docker

@@ -6,9 +6,9 @@ class Ability
       can :account_connection, Bot
       can [:read, :update], Bot, user_id: nil
       can :manage, Bot, user_id: user.id
-      # can :run_code, Bot do |bot|
-      #   bot.template? || bot.user_id == user.id
-      # end
+      can :run, Bot do |bot|
+        bot.template?
+      end
       if user.admin?
         can :manage, Bot
       end
