@@ -12,6 +12,8 @@
           <%= f.label :prepend, '앞에 붙는 코드' %>
           <%= f.text_area :prepend, class: 'form-control', rows: 10 %>
         </div>
+        <% else %>
+          <%= f.text_area :prepend, class: 'd-none' %>
         <% end %>
 
         <div class="form-group">

@@ -141,7 +141,7 @@ document.addEventListener('turbolinks:load', function () {
       response.dataset.turbolinks = 'cached'
     }
 
-    if (prepend) {
+    if (prepend && !prepend.classList.contains('d-none')) {
       if (prepend.dataset.turbolinks != 'cached') {
         prependCm = initCodeMirror('<%= ENV.fetch("CHATBOT_LANGUAGE_EN") { 'python' } %>', prepend)
         prepend.dataset.turbolinks = 'cached'
