@@ -3,21 +3,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.1'
 
-gem 'figaro'
+gem 'figaro', '~> 1.2.0'
 
-gem 'devise'
+gem 'devise', '~> 4.7.2'
 # gem 'react-rails'
 
 gem 'bootstrap', '~> 4.3.1'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.4.0'
 
-gem 'codemirror-rails'
+gem 'codemirror-rails', '~> 5.16.0'
 
 gem 'font-awesome-sass', '~> 5.0.13'
 
 gem 'cancancan', '~> 2.0'
 
-gem 'pusher'
+gem 'pusher', '~> 1.3.1'
 gem 'httparty', '~> 0.17.1'
 
 # AWS SDK
@@ -25,7 +25,7 @@ gem 'aws-sdk-s3', '~> 1.32'
 gem 'aws-sdk-lambda', '~> 1.32'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2.1'
+gem 'rails', '~> 5.2.4.3'
 # Use mysql as the database for Active Record
 # gem 'mysql2', '~> 0.5.1'
 # Use Puma as the app server
