@@ -1,7 +1,7 @@
 <div class="d-flex flex-column flex-lg-row user">
-  <div class="d-flex flex-row flex-lg-column user--intro">
-    <h2><%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇</h2>
-    <h2 class="ml-2 ml-lg-0">비밀번호 재설정</h2>
+  <div class="d-flex flex-row flex-lg-column flex-wrap user--intro">
+    <h2 class="mr-2 mr-lg-0"><%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇</h2>
+    <h2>비밀번호 재설정</h2>
   </div>
   
   <div class="d-flex flex-column user--form">
@@ -18,7 +18,7 @@
       <% end %>
 
       <div class="user--button">
-        <%= f.submit "계정 인증", class: "btn btn-primary" %>
+        <%= f.submit "계정 인증", class: "btn btn-primary mb-2" %>
         <%= render "devise/shared/links" %>
       </div>
     <% end %>

@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-lg-row user">
-  <div class="d-flex flex-row flex-lg-column user--intro">
+  <div class="d-flex flex-row flex-lg-column flex-wrap user--intro">
     <h2><%= ENV.fetch("CHATBOT_LANGUAGE_KO") { '파이썬' } %> 챗봇</h2>
   </div>
 
@@ -23,7 +23,7 @@
       <% end %>
 
       <div class="user--button">
-        <%= f.submit "로그인", class: "btn btn-primary" %>
+        <%= f.submit "로그인", class: "btn btn-primary mb-2" %>
         <%= render "devise/shared/links" %>
       </div>
     <% end %>
