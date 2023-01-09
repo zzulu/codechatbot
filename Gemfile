@@ -18,7 +18,7 @@ gem 'font-awesome-sass', '~> 5.0.13'
 gem 'cancancan', '~> 2.0'
 
 gem 'pusher', '~> 1.3.1'
-gem 'httparty', '~> 0.17.1'
+gem 'httparty', '~> 0.21.0'
 
 # AWS SDK
 gem 'aws-sdk-s3', '~> 1.32' 
